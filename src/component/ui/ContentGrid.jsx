@@ -17,26 +17,12 @@ import ContentBox from "./ContentBox";
 function ContentGrid(){
 
     const [visible, setVisible] = useState(false); //-> delay 없애는 것 필요
-    //const visible = true;
-    //const [focus, setFocus] = useState(true);
-    const move = useRef();
-    const stay = useRef();
-
-    /*const Focus = () => {
-        if(focus){
-            //setVisible(true); // move가 visible이 되어야 나타나는 component내부에 있다
-            move.current.focus(); // 반드시 먼저 보이고 focus해야함
-            setFocus(false);
-        } else {
-            //setVisible(false);
-            stay.current.focus();
-            setFocus(true);
-        }
-    };*/
+    const move = useRef(); // 이런 input , button component에만 적용됨
+    const stay = useRef(); // focus 이동시킬 때 사용
 
     const Move = () => {
-        setVisible(true);
-        move.current.focus();
+        setVisible(true); // 글 자세히 보기 창과 댓글 쓰기 창을 보여줌
+        move.current.focus(); // focus 이동
     };
 
     const Stay = () => {
@@ -46,12 +32,7 @@ function ContentGrid(){
     
     
     return(
-        <Grid container spacing={6}
-            /*onFocus={()=>{ // 글쓰기 버튼 클릭 했을 때 옆으로 창이동 focus 
-                setVisible(true); // button 클릭, input창 입력 등을 하면 focus가 된다.
-            }}*/
-            //onFocus={Focus}
-        >
+        <Grid container spacing={6}>
             <Grid item xs={12} sm={6.6}>
 
                 <Grid container spacing={1}>
