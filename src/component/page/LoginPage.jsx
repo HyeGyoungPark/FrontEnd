@@ -192,7 +192,7 @@ function LoginPage(props) {
                                         borderColor: 'white'
                                     }
                                 }}
-                                onClick={() => {navigate("./SignUpPage")}}
+                                onClick={() => {navigate("/SignUpPage")}}
                             >
                                 회원가입
                             </Button>

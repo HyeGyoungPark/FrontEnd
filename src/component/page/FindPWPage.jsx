@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '../ui/Button';
 import {useNavigate} from "react-router-dom";
-import * as S from "../../styles/theme";
+import * as S from "../style/theme";
 import InputContainer from '../ui/InputContainer';
 
 const userID = "abc";
