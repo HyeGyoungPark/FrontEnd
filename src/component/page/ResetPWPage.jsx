@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import Button from '../ui/Button';
 import InputContainer from '../ui/InputContainer';
-import * as S from "../../styles/theme";
+import * as S from "../style/theme";
 
 const divStyle={
     position:"relative"
