@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import { Drawer, Box, List, ListItem, ListItemIcon, ListItemButton, 
     ListItemText, IconButton, Divider, InputBase, Collapse, Button } from '@mui/material';
 import {Inbox, ChevronLeft, SearchRounded, ExpandLess, ExpandMore, InsertEmoticon} from '@mui/icons-material';
@@ -44,7 +44,7 @@ const Circle = styled('div')({
     backgroundColor: 'rgb(163, 151, 198)',
 });
 
-function Sidebar({toggle, closeBar}){
+function Sidebar(props){
     const items = [
         'write',
         'friends', 
@@ -124,6 +124,25 @@ function Sidebar({toggle, closeBar}){
     console.log(keyword);
     const navigate = useNavigate();
     const [nestedOpen, setNestedOpen] = useState(false);
+    const [mousePositionX, setMousePositionX] = useState();
+
+    //mouse pointer 위치 받아와서 변경되면 handleMouseMove 실행
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setMousePositionX(e.clientX);
+            const clientX = mousePositionX;
+            if(clientX >= 0 && clientX <= 10){
+                slideRight();
+            }
+            else if(clientX > 310){
+                slideLeft();
+            }
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        
+    })
+
+    const [toggle, setToggle] = useState(false);
 
     const onChange = (e) => {
         setKeyword(e.target.value);
@@ -132,20 +151,29 @@ function Sidebar({toggle, closeBar}){
     const handleClick = () => {
         setNestedOpen(!nestedOpen);
     } 
+
+    const slideRight = () => {
+        console.log('right');
+        setToggle(true);
+    }
+
+    const slideLeft = () => {
+        console.log('left');
+        setToggle(false);
+    }
+
     
     return (
         <Box 
             sx={{ 
                 display: 'flex',
                 alignItems: 'center',
-            }}
+            }}          
         >
             <Drawer 
                 anchor="left" 
                 open={toggle}
-                PaperProps={{
-                    sx: {width: '280px'}
-                }} 
+                style={{width: '280px'}}
             >
                 <List>
                     <Search key='search'>
@@ -211,12 +239,6 @@ function Sidebar({toggle, closeBar}){
                     })}
                     
                 </List>
-                <Divider />
-                <DrawerHandler>
-                    <IconButton onClick={closeBar}>
-                        <ChevronLeft />
-                    </IconButton>
-                </DrawerHandler>
             </Drawer>
         </Box>
     );
