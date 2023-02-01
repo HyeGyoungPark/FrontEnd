@@ -1,17 +1,7 @@
-import React, { useState, createContext, useContext} from "react";
-import styled, { ThemeProvider } from "styled-components";
-//import theme from "../../../theme";
-import { useNavigate } from "react-router-dom";
-import { Container, CssBaseline } from '@mui/material';
+import React, { useState } from "react";
 import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
-import { Typography } from '@mui/material';
-import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
-import { Link } from '@mui/material';
-import MainPage from "../page/MainPage";
-import { border } from "@mui/system";
-import { Focus } from "../page/MainPage";
 
 
 function ContentBox({Move}){ // 상위 component에서 전달한 이름 그대로 받기
