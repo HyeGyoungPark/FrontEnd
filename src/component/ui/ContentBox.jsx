@@ -4,8 +4,12 @@ import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 
 
-function ContentBox({Move}){ // 상위 component에서 전달한 이름 그대로 받기
-    const [visible, SetVisible] = useState(false);
+function ContentBox(props){ // 상위 component에서 전달한 이름 그대로 받기
+
+    const {Move, id, title, content, setId, setTitle, setContent} = props;
+
+    const [visible1, setVisible1] = useState(false);
+    const [visible2, setVisible2] = useState(true);
 
     return(
         <Grid item xs={12} sm={2.4}>
@@ -21,15 +25,24 @@ function ContentBox({Move}){ // 상위 component에서 전달한 이름 그대�
                         backgroundColor: 'lightgray'
                     }
                 }}
-                onMouseOver={()=>{ // 마우스 올리면 Link 보이게 
-                    SetVisible(true);
+                onMouseOver={()=>{ 
+                    setVisible1(true); // 마우스 올리면 Button 보이게 
+                    setVisible2(false); // 마우스 올리면 글 안보이게 
                 }}
-                onMouseOut={()=>{ // 마우스 내리면 Link 안보이게 
-                    SetVisible(false);
+                onMouseOut={()=>{ 
+                    setVisible1(false); // 마우스 내리면 Button 안보이게
+                    setVisible2(true); // 마우스 내리면 글 보이게
                 }}
             >
                 {
-                    visible 
+                    visible2
+
+                    &&
+
+                    title
+                }
+                {
+                    visible1
 
                     && 
 
@@ -39,14 +52,16 @@ function ContentBox({Move}){ // 상위 component에서 전달한 이름 그대�
                             border: '1px solid skyblue'
                         }}
 
-                        onClick={
-                            Move // 여기에 받은 이름 써주기 
-                        }
+                        onClick={ () => { // 함수 여러개 전달 가능
+                            Move(); // 여기에 받은 이름 써주기 
+                            setId(id); // 하위 component에서 상위 component로 data 전달
+                            setTitle(title);
+                            setContent(content);
+                        }}
                     >
-                        글 보기!
+                        자세히 보기
                     </Button>
                 }
-                
             </Box>
         </Grid>
     );
