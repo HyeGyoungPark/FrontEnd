@@ -10,42 +10,51 @@ function FirstPage(props) {
   return (
     <div class="container">
       <svg
-        viewBox="0 0 1418 116"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <title>@WebDesignerMag</title>
-        <g stroke="none" fill="none" fill-rule="evenodd" fill-opacity="0">
+         <g stroke="none" fill="white" fill-rule="evenodd" fill-opacity="0"> 
           <text
             id="@WebDesignerMag"
-            stroke="#fff"
-            fill="#645F5A"
+            stroke="white"
+            fill="rgb(95, 196, 236)"
             font-weight="normal"
-            font-family="PermanentMarker-Regular, Permanent Marker"
-            font-size="144"
+            font-family="Playfair Display, serif"
+            font-size="110"
           >
-            <tspan x="3" y="109">
-              <tspan>@</tspan>
+            <tspan x="50" y="109" class="welcome">
+              <tspan> </tspan>
               <tspan>W</tspan>
               <tspan>e</tspan>
-              <tspan>b</tspan>
-              <tspan>D</tspan>
+              <tspan>l</tspan>
+              <tspan>c</tspan>
+              <tspan>o</tspan>
+              <tspan>m</tspan>
               <tspan>e</tspan>
+              <tspan> </tspan>
+              <tspan>t</tspan>
+              <tspan>o</tspan>
+              <tspan> </tspan>
+              <tspan>t</tspan>
+              <tspan>h</tspan>
+              <tspan>e</tspan>
+            </tspan>
+
+
+            <tspan x="550" y="270" className="bstar" fontSize={"200"}>
+              <tspan>B</tspan>
               <tspan>s</tspan>
-              <tspan>i</tspan>
-              <tspan>g</tspan>
-              <tspan>n</tspan>
-              <tspan>e</tspan>
-              <tspan>r</tspan>
-              <tspan>M</tspan>
+              <tspan>t</tspan>
               <tspan>a</tspan>
-              <tspan>g</tspan>
+              <tspan>R</tspan>
             </tspan>
           </text>
-        </g>
+        </g> 
       </svg>
       <button
+        className="SLbutton"
         type="submit"
         variant="outlined"
         onClick={() => {

@@ -4,7 +4,7 @@
 
 .container {
   /* background:linear-gradient( to right,#ffc9bd, #c1d3ff);   */
-   background:  linear-gradient(110deg, skyblue 60%, white 60%); 
+   background:  linear-gradient(110deg, skyblue 65%, white 65%); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,13 +43,12 @@ color : rgb(54, 181, 240);
 }
 
 
-
-
-
-
 .bstar{
   font-size: 210;
 }
+
+
+
 .container svg tspan > tspan {
   stroke-dasharray: 1500;
   stroke-dashoffset: -1500;
