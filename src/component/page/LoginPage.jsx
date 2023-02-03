@@ -126,7 +126,9 @@ function LoginPage(props) {
                                         borderColor: 'skyblue'
                                     }
                                 }}
-                                onClick={() => {navigate("./MainPage")}}
+                                onClick={() => {
+                                    navigate("/main");
+                                  }}
                             >
                                 로그인
                             </Button>

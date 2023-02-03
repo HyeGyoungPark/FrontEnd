@@ -1,9 +1,12 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 import MainPageContent from '../ui/MainPageContent';
 
 
 function MainPage(props) {
+
+    const navigate = useNavigate();
 
     const isFull = useMediaQuery({
         query : "(min-width:1440px)"
