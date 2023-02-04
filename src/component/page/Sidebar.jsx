@@ -5,12 +5,13 @@ import {SearchRounded, ExpandLess, ExpandMore, Group, Settings, Edit} from '@mui
 import {styled} from '@mui/system';
 import {useNavigate} from "react-router-dom";
 import data from "../../data.json";
+import { useStore, useSideState } from './SearchPage';
 
 const Search = styled(ListItem)({
-    border: '1px solid #8c8c8c',
     width: '90%',
     borderRadius: '20px',
-    marginLeft: '15px',
+    margin: '10px 0px 10px 15px',
+    backgroundColor: 'rgba(0,0,0,0.06)',
 });
 
 const SearchIconWrapper = styled('div')({
@@ -22,7 +23,7 @@ const SearchIconWrapper = styled('div')({
 const SearchInput = styled(InputBase)({
     display: 'inline-block',
     marginLeft: '10px',
-    fontSize: '17px',
+    fontSize: '15px',
 });
 
 const NestedBox = styled(Collapse)({
@@ -44,11 +45,11 @@ const ImageCircle = styled('div')({
     width: '35px',
     height: '35px',
     borderRadius: '50%',
-    border: '1px solid #8c8c8c',
+    backgroundColor: '#15456915',
     marginRight: '20px',
 });
 
-function Sidebar(props){
+function Sidebar(){
     const items = [
         'write',
         'friends', 
@@ -59,38 +60,29 @@ function Sidebar(props){
         '글쓰기',
         '이웃',
         '설정',
-    ]
+    ];
 
-    const [keyword, setKeyword] = useState("");
-    console.log(keyword);
-    const navigate = useNavigate();
+    const [keyword, setKeyword] = useStore("");
+    const [state, setState] = useSideState();
     const [nestedOpen, setNestedOpen] = useState(false);
     const [mousePositionX, setMousePositionX] = useState();
+    const [toggle, setToggle] = useState(false);
+    const navigate = useNavigate();
+    const [word, setWord] = useState("");
 
     useEffect(() => {
-        const handleMouseMove = (e) => {
+        const onMouseMove = (e) => {
             setMousePositionX(e.clientX);
             const clientX = mousePositionX;
             if(clientX >= 0 && clientX <= 10){
                 setToggle(true);
             }
-            else if(clientX > 250){
+            else if(clientX > 300){
                 setToggle(false);
             }
         };
-        window.addEventListener('mousemove', handleMouseMove);
-        
+        window.addEventListener('mousemove', onMouseMove);
     })
-
-    const [toggle, setToggle] = useState(false);
-
-    const onChange = (e) => {
-        setKeyword(e.target.value);
-    }
-
-    const handleClick = () => {
-        setNestedOpen(!nestedOpen);
-    } 
 
     return (
         <Box 
@@ -102,29 +94,39 @@ function Sidebar(props){
             <Drawer 
                 anchor="left" 
                 open={toggle}
-                PaperProps={{
-                    sx: {
-                        width: '250px',
-                    }
-                }}
+                PaperProps={{sx: {width: '300px'}}}
             >
                 <List>
-                    <ListItem key='home' onClick={() => navigate("..")} sx={{cursor: 'pointer'}}>
-                        <Typography variant="h4" sx={{margin: '10px 10px'}}>Bstar</Typography>
+                    <ListItem key='header'>
+                        <Typography variant="h4" onClick={() => navigate("..")} sx={{margin: '10px 10px', cursor: 'pointer'}} >Bstar</Typography>
+                        <Typography variant="body" onClick={() => {navigate("/main"); setToggle(false);}} sx={{margin: '10px 10px 10px 100px', cursor: 'pointer', color: 'rgba(23, 36, 40, 0.8)'}}>home</Typography>
                     </ListItem>
-                    <Search key='search' sx={{margin: '10px'}}>
+                    <Search key='search'>
                         <SearchIconWrapper>
                             <SearchRounded />
                         </SearchIconWrapper>
                         <SearchInput 
-                            label=""
-                            onChange={onChange}
-                            onKeyUp={(e) => {
-                                if(e.keyCode === 13)
-                                    navigate('/search');
+                            value={word}
+                            placeholder='검색어를 입력하세요.'
+                            onChange={(e) => {
+                                setKeyword(e.target.value);
+                                setWord(e.target.value);
                             }}
-                        />
-                    </Search>
+                            onKeyUp={(e) => {
+                                if(e.keyCode === 13){
+                                    if(keyword === ""){
+                                        alert('검색어를 입력해 주세요.');
+                                    }
+                                    else{
+                                        setWord("");
+                                        setToggle(false);
+                                        setState(state + 1 % 10);
+                                        navigate('/search');
+                                    }
+                                }
+                            }}
+                        />    
+                    </Search>   
                     {items.map((item, index) => {
                         if(item === 'friends'){
                              return(
@@ -136,7 +138,7 @@ function Sidebar(props){
                                             </ListItemIcon>
                                             <ListItemText primary={<Typography style={{fontWeight:'bold'}}>{texts[index]}</Typography>}/> 
                                         </ListItemButton>
-                                        <Button onClick={handleClick}>
+                                        <Button onClick={()=> {setNestedOpen(!nestedOpen)}}>
                                                 {nestedOpen? <ExpandLess /> : <ExpandMore />}
                                         </Button>
                                     </ListItem>
@@ -162,7 +164,8 @@ function Sidebar(props){
                             return(
                                 <ListItem key={item} sx={{padding: '0 5px'}}>
                                     <ListItemButton href={'/' + item}>
-                                        <ListItemIcon>{item === "setting"? <Settings style={{ color: 'skyblue' }} /> : <Edit style={{ color: 'skyblue' }} />}                                     
+                                        <ListItemIcon>
+                                            {item === "setting"? <Settings style={{ color: 'skyblue' }} /> : <Edit style={{ color: 'skyblue' }} />}
                                         </ListItemIcon>
                                         <ListItemText primary={<Typography style={{fontWeight:'bold'}}>{texts[index]}</Typography>}/>
                                     </ListItemButton>
@@ -170,7 +173,6 @@ function Sidebar(props){
                             );
                         }
                     })}
-                    
                 </List>
             </Drawer>
         </Box>
