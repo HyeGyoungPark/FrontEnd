@@ -102,7 +102,7 @@ function SettingPage(props) {
                         margin: '30px 0'
                     }}
                 >
-                    <Typography variant="h6">블로그 정보</Typography>
+                    <Typography variant="h6">프로필 정보</Typography>
                     <Divider sx={{width: '40%', border: '2px solid skyblue', margin: '5px 0'}} />
                     <Box
                         component="form"
@@ -115,7 +115,7 @@ function SettingPage(props) {
                     >
                         <FormControl sx={{marginBottom: '20px'}}>
                             <label style={{color: 'rgba(0,0,0,0.80)', marginBottom: '10px'}}>블로그 명</label>
-                            <OutlinedInput 
+                            <OutlinedInput
                                 name="blogName"
                                 value={inputs.blogName}
                                 onChange={onChangeInputs}
