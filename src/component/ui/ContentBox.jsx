@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 
 function ContentBox(props){ // 상위 component에서 전달한 이름 그대로 받기
 
-    const {Move, id, title, content, setId, setTitle, setContent} = props;
+    const {Move, onView, id, title, setId } = props;
 
     const [visible1, setVisible1] = useState(false);
     const [visible2, setVisible2] = useState(true);
@@ -55,8 +55,7 @@ function ContentBox(props){ // 상위 component에서 전달한 이름 그대로
                         onClick={ () => { // 함수 여러개 전달 가능
                             Move(); // 여기에 받은 이름 써주기 
                             setId(id); // 하위 component에서 상위 component로 data 전달
-                            setTitle(title);
-                            setContent(content);
+                            onView(id);
                         }}
                     >
                         자세히 보기

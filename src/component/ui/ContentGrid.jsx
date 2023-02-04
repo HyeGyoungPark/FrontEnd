@@ -4,32 +4,8 @@ import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 import ContentBox from "./ContentBox";
 import HiddenContentBox from "./HiddenContentBox";
-
-const list = [
-    {id: 1, title: '제목1', content: '글1'},
-    {id: 2, title: '제목2', content: '글2'},
-    {id: 3, title: '제목3', content: '글3'},
-    {id: 4, title: '제목4', content: '글4'},
-    {id: 5, title: '제목5', content: '글5'},
-
-    {id: 6, title: '제목6', content: '글6'},
-    {id: 7, title: '제목7', content: '글7'},
-    {id: 8, title: '제목8', content: '글8'},
-    {id: 9, title: '제목9', content: '글9'},
-    {id: 10, title: '제목10', content: '글10'},
-
-    {id: 11, title: '제목11', content: '글11'},
-    {id: 12, title: '제목12', content: '글12'},
-    {id: 13, title: '제목13', content: '글13'},
-    {id: 14, title: '제목14', content: '글14'},
-    {id: 15, title: '제목15', content: '글15'},
-
-    {id: 16, title: '제목16', content: '글16'},
-    {id: 17, title: '제목17', content: '글17'},
-    {id: 18, title: '제목18', content: '글18'},
-    {id: 19, title: '제목19', content: '글19'},
-    {id: 20, title: '제목20', content: '글20'}
-]
+import img from '../page/main/images';
+import { OndemandVideoTwoTone } from "@mui/icons-material";
 
 function ContentGrid(){
 
@@ -48,8 +24,11 @@ function ContentGrid(){
     };
 
     const [id, setId] = useState();
-    const [title, setTitle] = useState();
-    const [content, setContent] = useState();
+    const [data, setData] = useState(img[0]); //초기 data
+
+    const onView = (id) => { //contentBox에서 선택한 id와 같은 id의 data 찾기 
+        setData(img.find(item => item.id === id))
+    }
 
     /* 나중에 서버통신할 때 사용
     const [posts, setPosts] = useState([]); 
@@ -107,8 +86,8 @@ function ContentGrid(){
                                 */}
 
                                 {/* map 함수를 사용해야 data가 1개씩 전달됨 & data수만큼 글 생성 */}
-                                { list.map((list) => (
-                                   <ContentBox Move={Move} setId={setId} setTitle={setTitle} setContent={setContent} key={list.id} {...list}></ContentBox>  
+                                { img.map((img) => (
+                                   <ContentBox Move={Move} onView={onView} setId={setId} key={img.id} img={img} {...img}></ContentBox>  
                                 ))}
                             </Grid>
                         </Box>
@@ -141,7 +120,7 @@ function ContentGrid(){
                         >
                             X
                         </Button>
-                        <HiddenContentBox id={id} title={title} content={content}></HiddenContentBox>
+                        <HiddenContentBox data={data}></HiddenContentBox>
                     </Box>
                 </Grid>
             }

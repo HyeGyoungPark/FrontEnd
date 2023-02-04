@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { Box } from '@mui/material';
-import { Grid } from '@mui/material';
-import { Button } from '@mui/material';
+import Gallery from "../page/main/Gallery";
 
 function HiddenContentBox(props) {
 
-    const {id, title, content} = props;
+    const {data} = props;
 
     return(
-        <p>
-            제목: {title}
-            <br/>
-            내용: {content}
-        </p>
+        <Box
+            sx={{
+                width: '60%',
+                height: '86vh',
+                border: '1px solid skyblue'
+            }}
+        >
+            <Gallery data={data}/>
+        </Box>
     );
 }
 
