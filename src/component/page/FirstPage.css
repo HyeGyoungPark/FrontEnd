@@ -13,7 +13,7 @@
 }
 .container svg {
 
-  width: 100%;
+  width: 80%;
   height: 300px;
   fill: none;
    stroke: white;
@@ -23,9 +23,9 @@
 }
 
 .SLbutton{
-  margin : 200px;
+  margin : 100px  100px 0px 100px;
   padding: 10px;
-  font-size: 50px;
+  font-size: 40px;
   background-color:unset;
   border-radius: 30px;
   border: none;
@@ -42,6 +42,13 @@ color : rgb(54, 181, 240);
 
 }
 
+.joinUs{
+  margin : 50px 0px 0px 0px ;
+  padding: 10px;
+  text-align: center;
+  color:  rgb(54, 181, 240);
+  font-size: 40px;
+}
 
 .bstar{
   font-size: 210;

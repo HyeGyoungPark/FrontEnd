@@ -22,7 +22,7 @@ function FirstPage(props) {
             fill="rgb(95, 196, 236)"
             font-weight="normal"
             font-family="Playfair Display, serif"
-            font-size="110"
+            font-size="80"
           >
             <tspan x="50" y="109" class="welcome">
               <tspan> </tspan>
@@ -43,7 +43,7 @@ function FirstPage(props) {
             </tspan>
 
 
-            <tspan x="550" y="270" className="bstar" fontSize={"200"}>
+            <tspan x="350" y="270" className="bstar" fontSize={"200"}>
               <tspan>B</tspan>
               <tspan>s</tspan>
               <tspan>t</tspan>
@@ -53,7 +53,8 @@ function FirstPage(props) {
           </text>
         </g> 
       </svg>
-      <button
+      <div>
+        <button
         className="SLbutton"
         type="submit"
         variant="outlined"
@@ -63,6 +64,10 @@ function FirstPage(props) {
       >
         Login / Sign Up
       </button>
+      <p className="joinUs">To Join Us !</p>
+      </div>
+
+      
     </div>
   );
 }
