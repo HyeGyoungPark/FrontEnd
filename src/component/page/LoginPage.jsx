@@ -54,7 +54,7 @@ function LoginPage(props) {
                     <Grid item xs={12} sm={6}>
                         <Box 
                             sx={{
-                                height: '50vh',
+                                height: '60vh',
                                 backgroundColor: '#fafafa',
                                 display: 'flex',
                                 flexDirection: 'column', //여기서는 direction이 column으로 바뀌었으므로 
@@ -148,7 +148,7 @@ function LoginPage(props) {
                     <Grid item xs={12} sm={6}> {/*12로 나누었을 때 6만큼을 쓴다는 의미*/}
                         <Box 
                             sx={{
-                                height: '50vh',
+                                height: '60vh',
                                 background: 'linear-gradient(to right, #C3E7FA, #91D8FA)',
                                 alignItems: 'center',
                                 display: 'flex',
