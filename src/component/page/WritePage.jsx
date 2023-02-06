@@ -5,6 +5,8 @@ import TextInput from "../ui/TextInput";
 import CommentBox from "../ui/CommentBox";
 import { Button } from '@mui/material';
 import { CountertopsSharp } from "@mui/icons-material";
+import DetailList from "../list/DetailList"
+import { Input } from "antd"
 
 //화면의 중앙에 위치시킴
 const Wrapper = styled.div`
@@ -26,6 +28,14 @@ const Container = styled.div`
         }
     }
 `;
+
+const CreateListDiv = styled.div`
+  padding: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
 
 /*const CreateList = () => {
     const [countList, setCountList] = useState([0])
@@ -54,6 +64,7 @@ const Container = styled.div`
                 </TextInput>
 */
 
+const { TextArea } = Input
 
 function WritePage(props) {
     const navigate = useNavigate();
@@ -61,26 +72,25 @@ function WritePage(props) {
     const [title, SetTitle] = useState("");
     const [content, setContent] = useState("");
 
+    const [countList, setCountList] = useState([0])
+
+    const onAddWrite = () => {
+        let countArr = [...countList]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)
+        setCountList(countArr)
+    }
+
     return (
         <Wrapper>
             <Container>
-                <TextInput>
-                    height={20}
-                    value={title}
-                    placeholder={'제목을 입력하세요'}
-                    onChange={(event) => {
-                        SetTitle(event.target.value);
-                    }}
-                </TextInput>
-
-                <TextInput>
-                    height={480}
-                    value={content}
-                    placeholder={'내용을 입력하세요'}
-                    onChange={(event) => {
-                        setContent(event.target.value);                        
-                    }}   
-                </TextInput>
+            <TextArea
+                autoSize={{ minRows: 1, maxRows: 1}}/>
+            <CreateListDiv>
+                <DetailList countList={countList}/>
+            </CreateListDiv>
+            
 
                 <Button 
                 type="submit" 
@@ -100,7 +110,7 @@ function WritePage(props) {
                     borderColor: 'skyblue'
                     }
                 }}
-                onClick={() => {}}>글 추가
+                onClick={onAddWrite}>글 추가
                 </Button>
                 
                 <Button 
