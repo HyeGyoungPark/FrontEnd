@@ -16,6 +16,7 @@ function HiddenContentBox(props) {
         >
             <Gallery data={data}/>
         </Box>
+        
     );
 }
 
