@@ -5,7 +5,12 @@ import { Button } from '@mui/material';
 import ContentBox from "./ContentBox";
 import HiddenContentBox from "./HiddenContentBox";
 import img from '../page/main/images';
-import { OndemandVideoTwoTone } from "@mui/icons-material";
+import { OndemandVideoTwoTone, PostAddOutlined } from "@mui/icons-material";
+import postData from "../../postData.json";
+import { useParams } from "react-router-dom";
+import CommentBox from "./CommentBox";
+
+
 
 function ContentGrid(){
 
@@ -29,6 +34,12 @@ function ContentGrid(){
     const onView = (id) => { //contentBox에서 선택한 id와 같은 id의 data 찾기 
         setData(img.find(item => item.id === id))
     }
+
+    
+
+
+
+
 
     /* 나중에 서버통신할 때 사용
     const [posts, setPosts] = useState([]); 
@@ -121,6 +132,9 @@ function ContentGrid(){
                             X
                         </Button>
                         <HiddenContentBox data={data}></HiddenContentBox>
+                        <CommentBox data={postData}></CommentBox>
+                        
+                        
                     </Box>
                 </Grid>
             }
