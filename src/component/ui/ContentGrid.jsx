@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
 
 import ProfileImage from './ProfileImage';
-
+import MusicBox from "./MusicBox";
 
 
 function ContentGrid(){
@@ -80,7 +80,10 @@ function ContentGrid(){
                             </Button>
                             profile
 
-                            <ProfileImage/>
+                            <ProfileImage/>     {/* 프사 */}
+
+                            <MusicBox />
+                           
 
                         </Box>
                     </Grid>
