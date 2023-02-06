@@ -22,7 +22,8 @@ function FirstPage(props) {
             fill="rgb(95, 196, 236)"
             font-weight="normal"
             font-family="Playfair Display, serif"
-            font-size="80"
+            // font-size="80"
+            font-size="5vw"
           >
             <tspan x="50" y="109" class="welcome">
               <tspan> </tspan>
@@ -43,7 +44,7 @@ function FirstPage(props) {
             </tspan>
 
 
-            <tspan x="350" y="270" className="bstar" fontSize={"200"}>
+            <tspan x="250" y="280" className="bstar" fontSize={"15vw"}>
               <tspan>B</tspan>
               <tspan>s</tspan>
               <tspan>t</tspan>

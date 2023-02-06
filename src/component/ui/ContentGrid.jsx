@@ -10,6 +10,8 @@ import postData from "../../postData.json";
 import { useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
 
+import ProfileImage from './ProfileImage';
+
 
 
 function ContentGrid(){
@@ -77,6 +79,9 @@ function ContentGrid(){
                                 profile
                             </Button>
                             profile
+
+                            <ProfileImage/>
+
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={9}>
