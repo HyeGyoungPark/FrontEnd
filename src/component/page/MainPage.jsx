@@ -30,7 +30,7 @@ function MainPage(props) {
     
     return (
         <div>
-            {isFull && <MainPageContent style={{ marginTop: '0.2%' }}></MainPageContent>}
+            {isFull && <MainPageContent style={{ marginTop: '0.2%' }}> </MainPageContent>}
             {isLarge && <MainPageContent style={{ marginTop: '2%' }}></MainPageContent>}
             {isLargeMedium && <MainPageContent style={{ marginTop: '3.3%' }}></MainPageContent>}
             {isMedium && <MainPageContent style={{ marginTop: '6%' }}></MainPageContent>}
