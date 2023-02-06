@@ -45,9 +45,7 @@ const GalleryItem = (props) => {
                 src={data.image[index]} 
                 alt={''}
                 style={{
-                    minWidth: '50%',
-                    minHeight: '40vh',
-                    width: 'auto',
+                    width: '55%',
                     height: 'auto'
                 }}
             />

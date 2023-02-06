@@ -9,7 +9,7 @@ function HiddenContentBox(props) {
     return(
         <Box
             sx={{
-                width: '60%',
+                width: '55%',
                 height: '86vh',
                 border: '1px solid skyblue'
             }}
