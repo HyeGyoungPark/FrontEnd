@@ -3,7 +3,6 @@ import Sidebar from '../page/Sidebar';
 import {Box} from '@mui/material';
 import ContentGrid from './ContentGrid';
 import './MainPageContent.css';
-import CommentList from "../list/CommentList";
 
 
 function MainPageContent(props) {

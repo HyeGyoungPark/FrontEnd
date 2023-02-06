@@ -30,15 +30,10 @@ function MainPage(props) {
     });
     
     return (
-<<<<<<< HEAD
         <div
             className="box" // 세로 scroll과는 달리 가로 scroll은 상위 tag에 해주어야 함
         >
-            {isFull && <MainPageContent style={{ marginTop: '0.2%' }}></MainPageContent>}
-=======
-        <div>
             {isFull && <MainPageContent style={{ marginTop: '0.2%' }}> </MainPageContent>}
->>>>>>> acd3846760ef97a89ae29c64ba6634e42290ae8f
             {isLarge && <MainPageContent style={{ marginTop: '2%' }}></MainPageContent>}
             {isLargeMedium && <MainPageContent style={{ marginTop: '3.3%' }}></MainPageContent>}
             {isMedium && <MainPageContent style={{ marginTop: '6%' }}></MainPageContent>}
