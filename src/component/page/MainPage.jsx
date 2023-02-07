@@ -2,6 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import MainPageContent from '../ui/MainPageContent';
+import '../ui/MainPageContent.css';
 
 
 function MainPage(props) {
@@ -29,7 +30,9 @@ function MainPage(props) {
     });
     
     return (
-        <div>
+        <div
+            className="box" // 세로 scroll과는 달리 가로 scroll은 상위 tag에 해주어야 함
+        >
             {isFull && <MainPageContent style={{ marginTop: '0.2%' }}> </MainPageContent>}
             {isLarge && <MainPageContent style={{ marginTop: '2%' }}></MainPageContent>}
             {isLargeMedium && <MainPageContent style={{ marginTop: '3.3%' }}></MainPageContent>}
