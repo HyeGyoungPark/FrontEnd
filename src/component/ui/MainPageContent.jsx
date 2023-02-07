@@ -2,12 +2,13 @@ import React from 'react';
 import Sidebar from '../page/Sidebar';
 import {Box} from '@mui/material';
 import ContentGrid from './ContentGrid';
-import CommentList from "../list/CommentList";
+import './MainPageContent.css';
 
 
 function MainPageContent(props) {
     return (
         <Box
+            className="box"
             sx={{
                 width: '172%',
                 height: '85vh',

@@ -39,10 +39,6 @@ function ContentGrid(){
 
     
 
-
-
-
-
     /* 나중에 서버통신할 때 사용
     const [posts, setPosts] = useState([]); 
 
