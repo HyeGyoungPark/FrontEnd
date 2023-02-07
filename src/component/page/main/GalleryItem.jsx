@@ -45,8 +45,11 @@ const GalleryItem = (props) => {
                 src={data.image[index]} 
                 alt={''}
                 style={{
-                    width: '55%',
-                    height: 'auto'
+                    //width: '60%', //이미지 비율 다시 조정하기, 남주혁 넣기
+                    width: 'auto',
+                    height: '40vh',
+                    maxWidth: '58%',
+                    //minHeight: '50vh'
                 }}
             />
          
