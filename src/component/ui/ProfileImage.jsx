@@ -9,8 +9,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 
-import AvatarUploader from "react-avatar-uploader";
-
 function ProfileImage(props) {
   const [open, setOpen] = useState(false);
 
