@@ -12,6 +12,7 @@ import music4 from "./music/MC Mong - 죽을 만큼 아파서 (Feat. 멜로우).
 import music5 from "./music/윤하 - 우리가 헤어진 진짜 이유.mp3";
 import music6 from "./music/효린-안녕.mp3";
 import { Grid } from "@mui/material";
+import { Box } from '@mui/material';
 
 const WhatMusic = styled.div`
   text-align: center;
@@ -108,8 +109,14 @@ function MusicBox(props) {
   };
 
   return (
-    <div>
-      <Grid sx = {{margin: "0 1vw", height: "2vw", width: "22vw"}}>
+    <div  style={{
+      border:"1px solid skyblue",
+      margin:"0.5vw",
+    }}
+    >
+   
+         <Grid sx = {{margin: "1vw", height: "2vw", width: "22vw"}}>
+        
         <WhatMusic>now playing - </WhatMusic>
 
         <Select onChange={handleMusic} value={musics}>
@@ -119,16 +126,20 @@ function MusicBox(props) {
             </option>
           ))}
         </Select>
-      </Grid>
-
-      <ReactAudioPlayer
+      </Grid >
+      <Grid sx = {{margin: "0.5vw", height: "2vw", width: "22vw"}}>
+        
+         <ReactAudioPlayer
         src={musics}
         type="audio/mp3"
         volume={0.1}
         autoPlay
         controls
         style={{ margin: "0 1vw", height: "2vw", width: "20vw" }}
-      ></ReactAudioPlayer>
+      ></ReactAudioPlayer> 
+ 
+ </Grid >
+      
 
     </div>
   );

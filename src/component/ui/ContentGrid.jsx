@@ -12,6 +12,7 @@ import CommentBox from "./CommentBox";
 
 import ProfileImage from './ProfileImage';
 import MusicBox from "./MusicBox";
+import ProfileContents from "./ProfileContents";
 
 
 function ContentGrid(){
@@ -77,7 +78,7 @@ function ContentGrid(){
                             profile
 
                             <ProfileImage/>     {/* 프사 */}
-
+                            <ProfileContents/>
                             <MusicBox />
                            
 

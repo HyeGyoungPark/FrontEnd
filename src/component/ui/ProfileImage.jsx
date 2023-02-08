@@ -39,10 +39,14 @@ function ProfileImage(props) {
   };
 
   return (
-    <div>
+    <div style={{
+      alignItems : "center",
+      placeItems : "center",
+      display : "grid",
+  }}>
       <Avatar
         src={Image}
-        style={{ margin: "1vw", width: "20vw", height: "20vw" }}
+        style={{ margin: "0.5vw", width: "15vw", height: "15vw" }}
         onClick={() => {
           setOpen(true);
         }}
