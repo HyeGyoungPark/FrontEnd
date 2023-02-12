@@ -6,7 +6,7 @@ import './MainPageContent.css';
 
 
 function MainPageContent(props) {
-    return (
+    return ( //로그아웃 버튼 만들기
         <Box
             className="box"
             sx={{
