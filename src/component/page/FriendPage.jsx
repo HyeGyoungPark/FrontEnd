@@ -30,7 +30,7 @@ function FriendPage(props) {
                 }}>
                 <Box sx={{width: '100%', margin: '30px'}}>
                     <Typography variant="h6">이웃 소식</Typography>
-                    <StyledDivider />
+                    <StyledDivider sx={{width: '100%'}}/>
                     <Box 
                         sx={{
                             width: '100%', 
