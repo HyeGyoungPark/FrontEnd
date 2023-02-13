@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from '@mui/material';
-import Gallery from "../../page/main/Gallery";
+import Gallery from "../../page/main/gallery/Gallery";
 
 function HiddenContentBox(props) {
 
