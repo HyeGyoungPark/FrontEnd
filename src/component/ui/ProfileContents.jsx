@@ -6,10 +6,10 @@ import data from "../../data.json";
 import { textAlign } from "@mui/system";
 
 function ProfileContents(props) {
-  const id = "1"; //임시로 설정
+  const email = "1@gmail.com"; //임시로 설정
 
   const person = data.find((person) => {
-    return person.id === id;
+    return person.email === email;
   });
 
   const [inputs, setInputs] = useState({

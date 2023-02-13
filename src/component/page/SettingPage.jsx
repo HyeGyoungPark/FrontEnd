@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Sidebar from './Sidebar';
 import { styled } from '@mui/material/styles';
 import {Box, Typography, Divider, OutlinedInput, FormControl, TableContainer, 
-    Table, TableHead, Button, TableRow, TableCell, Checkbox, TableBody, Paper, tableCellClasses} from '@mui/material';
+    Table, TableHead, Button, TableRow, TableCell, Checkbox, TableBody, Paper, 
+    tableCellClasses, TextField} from '@mui/material';
 import { Container } from '@mui/system';
 import data from "../../data.json";
 
@@ -16,23 +17,33 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
       },
 }))
 
+const StyledDivider = styled(Divider)({
+    width: '70%', 
+    border: '2px solid skyblue', 
+    margin: '5px 0'
+})
+
+
 function SettingPage(props) {
-    const id = "4"; //임시로 설정
+    
+    const [email, setEmail] = useState("1@gmail.com");
+    const [inputs, setInputs] = useState([])
+    const {blogName, nickName, introduction, image, music, friends} = inputs;
 
-    const person = data.find((person) => {
-        return person.id === id;
-    })
+    useEffect(() => {
+        const user = data.find((person) => {
+            return person.email === email;
+        })
 
-    const [inputs, setInputs] = useState({
-        blogName: person.blogName,
-        nickName: person.nickName,
-        introduction: person.introduction,
-        image: person.image,
-        music: person.music,
-        friends: person.friends, 
-    })
-
-    const [selected, setSelected] = useState([]);
+        setInputs({
+            blogName: user.blogName,
+            nickName: user.nickName,
+            introduction: user.introduction,
+            image: user.image,
+            music: user.music,
+            friends: user.friends, 
+        });
+    }, [email])
 
     const onChangeInputs = (e) => {
         const {value, name} = e.target;
@@ -43,12 +54,15 @@ function SettingPage(props) {
     }
 
     const onInputImage = (e) => {
-        const file = e.target.files;
-        console.log(file);
-        setInputs({
-            ...inputs,
-            image: file
-        });
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setInputs({
+                ...inputs,
+                image: reader.result
+            });
+        };
     }
     
     const onUploadImage = () => {
@@ -59,25 +73,27 @@ function SettingPage(props) {
         
     }
 
+    const [selected, setSelected] = useState([]);
+
     const onSelectAllClick = (e) => {
         if (e.target.checked) {
-            const newSelected = inputs.friends;
+            const newSelected = friends;
             setSelected(newSelected);
             return;
           }
           setSelected([]);
     }
 
-    const onSelectClick = (id) => {
-        const selectedIndex = selected.indexOf(id);
+    const onSelectClick = (email) => {
+        const selectedIndex = selected.indexOf(email);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, id);
+            newSelected = newSelected.concat(selected, email);
         } else if (selectedIndex === 0) {
-        newSelected = newSelected.concat(selected.slice(1));
+            newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
-        newSelected = newSelected.concat(selected.slice(0, -1));
+            newSelected = newSelected.concat(selected.slice(0, -1));
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
@@ -90,6 +106,7 @@ function SettingPage(props) {
     const isSelected = (nickName) => selected.indexOf(nickName) !== -1;
     
     const onRemoveData = () => {
+        //선택된 이웃 삭제
 
     }
 
@@ -103,13 +120,13 @@ function SettingPage(props) {
                     }}
                 >
                     <Typography variant="h6">프로필 정보</Typography>
-                    <Divider sx={{width: '40%', border: '2px solid skyblue', margin: '5px 0'}} />
+                    <StyledDivider/>
                     <Box
                         component="form"
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
-                            width: '200px',
+                            width: '300px',
                             margin: '40px 0',
                         }}
                     >
@@ -117,24 +134,26 @@ function SettingPage(props) {
                             <label style={{color: 'rgba(0,0,0,0.80)', marginBottom: '10px'}}>블로그 명</label>
                             <OutlinedInput
                                 name="blogName"
-                                value={inputs.blogName}
-                                onChange={onChangeInputs}
+                                value={blogName}
+                                onChange={(e) => onChangeInputs(e)}
                             />
                         </FormControl>
                         <FormControl sx={{margin: '20px 0'}}>
                             <label style={{color: 'rgba(0,0,0,0.80)', marginBottom: '10px'}}>별명</label>
                             <OutlinedInput 
                                 name="nickName"
-                                value={inputs.nickName}
-                                onChange={onChangeInputs}
+                                value={nickName}
+                                onChange={(e) => onChangeInputs(e)}
                             />
                         </FormControl>
                         <FormControl sx={{margin: '20px 0'}}>
                             <label style={{color: 'rgba(0,0,0,0.80)', marginBottom: '10px'}}>프로필 소개글</label>
-                            <OutlinedInput 
+                            <TextField
                                 name="introduction"
-                                value={inputs.introduction}
-                                onChange={onChangeInputs}
+                                value={introduction}
+                                multiline
+                                maxRows={4}
+                                onChange={(e) => onChangeInputs(e)}
                             />
                         </FormControl>
                         <FormControl sx={{margin: '20px 0'}}>
@@ -149,11 +168,33 @@ function SettingPage(props) {
                                     style={{display: 'none'}}
                                 />
                                 <div>
-                                    {inputs.image? (<img src={URL.createObjectURL(inputs.image[0])} alt="profileImage" width= '160px' height= '160px'/>) 
-                                    : (<Box sx={{width: '160px', height: '160px', border: '1px solid rgba(0,0,0,0.25)', borderRadius: '5px'}}></Box>)}
+                                    {image?
+                                        <img 
+                                            src={image} 
+                                            alt="profileImage" 
+                                            width= '160px' 
+                                            height= '160px'
+                                        />
+                                        : 
+                                        <Box 
+                                        sx={{
+                                            width: '180px', 
+                                            height: '180px', 
+                                            border: '1px solid rgba(0,0,0,0.25)', 
+                                            borderRadius: '5px'
+                                            }}
+                                        />
+                                    }
                                 </div>
                                 <label htmlFor="image-button">
-                                    <Button component="span" variant="outlined" onClick={onUploadImage} sx={{margin: '0 10px'}}>등록</Button>
+                                    <Button 
+                                        component="span" 
+                                        variant="outlined" 
+                                        onClick={onUploadImage} 
+                                        sx={{margin: '0 20px'}}
+                                    >
+                                        등록
+                                    </Button>
                                 </label>                
                             </Box>
                         </FormControl>
@@ -161,8 +202,8 @@ function SettingPage(props) {
                             <label style={{color: 'rgba(0,0,0,0.80)', marginBottom: '10px'}}>프로필 음악</label>
                             <OutlinedInput 
                                 name="music"
-                                value={inputs.music}
-                                onChange={onChangeInputs}
+                                value={music}
+                                onChange={(e) => onChangeInputs(e)}
                             /> 
                         </FormControl>
                     </Box> 
@@ -170,7 +211,7 @@ function SettingPage(props) {
                 </Box>
                 <Box sx={{margin: '20px 0'}}>
                     <Typography variant="h6">이웃 관리</Typography>
-                    <Divider sx={{width: '40%', border: '2px solid skyblue', margin: '5px 0'}} />
+                    <StyledDivider/>
                     <TableContainer component={Paper} sx={{margin: "30px 0", width: '40%'}}>
                         <Table aria-label="simple table" size="small">
                             <TableHead>
@@ -182,17 +223,17 @@ function SettingPage(props) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {inputs.friends.map((friend) => {
-                                    const newFriend = data.find((person) => {
-                                        return friend === person.id;
+                                {friends && friends.map((friend, index) => {
+                                    const newFriend = data.find((user) => {
+                                        return friend === user.email;
                                     });
-                                    const isItemSelected = isSelected(newFriend.id);
+                                    const isItemSelected = isSelected(newFriend.email);
                                     return(
                                         <TableRow 
                                             key={newFriend.nickName} 
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            onClick={() => onSelectClick(newFriend.id)}
+                                            onClick={() => onSelectClick(newFriend.email)}
                                             selected={isItemSelected}
                                         >
                                             <StyledTableCell>

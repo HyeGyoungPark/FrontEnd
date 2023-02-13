@@ -1,13 +1,10 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
-import MainPageContent from '../ui/MainPageContent';
-import '../ui/MainPageContent.css';
+import MainPageContent from '../ui/main/MainPageContent';
+import '../ui/main/MainPageContent.css';
 
 
 function MainPage(props) {
-
-    const navigate = useNavigate();
 
     const isFull = useMediaQuery({
         query : "(min-width:1440px)"
@@ -34,10 +31,10 @@ function MainPage(props) {
             className="box" // 세로 scroll과는 달리 가로 scroll은 상위 tag에 해주어야 함
         >
             {isFull && <MainPageContent style={{ marginTop: '0.2%' }}> </MainPageContent>}
-            {isLarge && <MainPageContent style={{ marginTop: '2%' }}></MainPageContent>}
-            {isLargeMedium && <MainPageContent style={{ marginTop: '3.3%' }}></MainPageContent>}
-            {isMedium && <MainPageContent style={{ marginTop: '6%' }}></MainPageContent>}
-            {isSmall && <MainPageContent style={{ marginTop: '8%' }}></MainPageContent>}
+            {isLarge && <MainPageContent style={{ marginTop: '0.5%' }}></MainPageContent>}
+            {isLargeMedium && <MainPageContent style={{ marginTop: '1%' }}></MainPageContent>}
+            {isMedium && <MainPageContent style={{ marginTop: '2%' }}></MainPageContent>}
+            {isSmall && <MainPageContent style={{ marginTop: '3%' }}></MainPageContent>}
         </div>
     );
 }

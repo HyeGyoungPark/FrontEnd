@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
-import MainPageContent from "../ui/MainPageContent";
+import MainPageContent from "../ui/main/MainPageContent";
 import "./FirstPage.css";
 
 function FirstPage(props) {

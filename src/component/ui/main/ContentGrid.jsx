@@ -4,15 +4,15 @@ import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 import ContentBox from "./ContentBox";
 import HiddenContentBox from "./HiddenContentBox";
-import img from '../page/main/images';
+import img from '../../page/main/images';
 import { OndemandVideoTwoTone, PostAddOutlined } from "@mui/icons-material";
-import postData from "../../postData.json";
+import postData from "../../../postData.json";
 import { useParams } from "react-router-dom";
-import CommentBox from "./CommentBox";
+import CommentBox from "../CommentBox";
 
-import ProfileImage from './ProfileImage';
-import MusicBox from "./MusicBox";
-import ProfileContents from "./ProfileContents";
+import ProfileImage from '../ProfileImage';
+import MusicBox from "../MusicBox";
+import ProfileContents from "../ProfileContents";
 
 
 function ContentGrid(){
