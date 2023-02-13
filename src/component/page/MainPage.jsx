@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import MainPageContent from '../ui/MainPageContent';
-import '../ui/MainPageContent.css';
+import MainPageContent from '../ui/main/MainPageContent';
+import '../ui/main/MainPageContent.css';
 
 
 function MainPage(props) {
