@@ -1,6 +1,5 @@
-import React,  {useState} from "react";
+import React from "react";
 import { Button } from '@mui/material';
-import { Box } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Dialog } from "@mui/material";

@@ -52,7 +52,8 @@ const GalleryItem = (props) => {
                         width: 'auto',
                         height: '40vh',
                         maxWidth: '100%',
-                        marginTop: '5%'
+                        marginTop: '5%',
+                        cursor: 'pointer'
                     }}
                     onClick={ () => {
                         setOpen(true);

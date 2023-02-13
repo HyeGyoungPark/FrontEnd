@@ -14,3 +14,14 @@
 .redHeart:hover{
     transform: scale(1.1);
 }
+
+.galleryTotal{
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

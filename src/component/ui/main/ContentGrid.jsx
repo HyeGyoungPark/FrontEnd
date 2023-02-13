@@ -1,13 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 import ContentBox from "./ContentBox";
 import HiddenContentBox from "./HiddenContentBox";
 import img from '../../page/main/images';
-import { OndemandVideoTwoTone, PostAddOutlined } from "@mui/icons-material";
 import postData from "../../../postData.json";
-import { useParams } from "react-router-dom";
 import CommentBox from "../CommentBox";
 
 import ProfileImage from '../ProfileImage';
