@@ -14,7 +14,11 @@ function HiddenContentBox(props) {
                 border: '1px solid skyblue'
             }}
         >
+            
             <Gallery data={data}/>
+            
+            
+            
         </Box>
         
     );

@@ -5,8 +5,8 @@ import { Button } from '@mui/material';
 import ContentBox from "./ContentBox";
 import HiddenContentBox from "./HiddenContentBox";
 import img from '../../page/main/images';
+import CommentBox from "../CommentBox"
 import postData from "../../../postData.json";
-import CommentBox from "../CommentBox";
 
 import ProfileImage from '../ProfileImage';
 import MusicBox from "../MusicBox";
@@ -134,10 +134,10 @@ function ContentGrid(){
                         >
                             X
                         </Button>
+                        <div style={{display: 'flex'}}>
                         <HiddenContentBox data={data}></HiddenContentBox>
                         <CommentBox data={postData}></CommentBox>
-                        
-                        
+                        </div>
                     </Box>
                 </Grid>
             }
