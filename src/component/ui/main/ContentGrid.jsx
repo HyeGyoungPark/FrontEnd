@@ -11,7 +11,7 @@ import postData from "../../../postData.json";
 import ProfileImage from '../ProfileImage';
 import MusicBox from "../MusicBox";
 import ProfileContents from "../ProfileContents";
-
+import YouTubePlayer from "../YoutubePlayer";
 
 function ContentGrid(){
 
@@ -78,6 +78,7 @@ function ContentGrid(){
                             <ProfileImage/>     {/* 프사 */}
                             <ProfileContents/>
                             <MusicBox />
+                            <YouTubePlayer/>
                            
 
                         </Box>
