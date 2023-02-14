@@ -18,8 +18,15 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: bottom;
+    justify-content: center;
 `;
+
+const Commentdata = styled.div`   //작성된 댓글 스크롤바 보이지않게 하기
+    overflow: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+`
 
 
 const { TextArea } = Input
@@ -27,7 +34,6 @@ const { TextArea } = Input
 function CommentBox(props) {
     const navigate = useNavigate();
     const { postId } = useParams();
-    console.log(props)
 
     const postcomment = postdata.find((item) => {
         return item.id == postId;
@@ -40,12 +46,15 @@ function CommentBox(props) {
     <Wrapper>
     <Box>
         <CommentLabel>댓글</CommentLabel>
-        <CommentList comments={props.comments}></CommentList>
+        <Commentdata>
+            <CommentList comments={postcomment.comments}></CommentList>
+        </Commentdata>
+        
         
         <TextArea 
             value={comment}
-            onChange={(event) => {setComment(event.target.value);}}
-            autoSize={{minRows: 1, maxRows: 1}}
+            onChange={(event) => {setComment(event.target.value)}}
+            autoSize={{minRows: 2, maxRows: 2}}
         />
 
         <Button 
