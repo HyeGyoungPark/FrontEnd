@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from '@mui/material';
 import { Input } from "antd"
+
+import * as resize from "../ui/resize.js"
+import Images from "./WriteImage"
 import axios from "axios";
+
 
 //화면의 중앙에 위치시킴
 const Wrapper = styled.div`
@@ -12,6 +16,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const WrapperBtn = styled.div`
+    padding: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Container = styled.div`
@@ -24,180 +37,100 @@ const Container = styled.div`
   }
 `;
 
-const CreateListDiv = styled.div`
-  padding: 3rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`
-
-/*const CreateList = () => {
-    const [countList, setCountList] = useState([0])
-    function onAddWrite(){
-        let countArr = [...countList]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        CountertopsSharp.push(counter)
-        setcountList(countArr)
-    }
-}
-<TextInput>
-                    {props.countList && props.countList.map((item, i) => (
-                        <div key={i}>
-                        height={480}
-                        value={content}
-                        placeholder={'내용을 입력하세요'}
-                        onChange={(event) => {
-                            setContent(event.target.value);
-                        }}
-                    </div>
-                    ))}
-                </TextInput>
-*/
-
 const { TextArea } = Input
 
 function WritePage(props) {
+    const [title, SetTitle] = useState("");
+    const [imageList, SetImageList] = useState([]);
+    const [contentList, SetContentList] = useState([]);
 
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const getImageList = (newImageList) => {
+        SetImageList(newImageList);
+    };
 
-    const [image,setImage] = useState("");
-    const [content1,setContent1] = useState("");
+    const uploadFile = async (e) => {
+        let fileArr = e.target.files;
+        let imageListLength = imageList.length;
+        let filesLength = fileArr.length > 10 ? 10 : fileArr.length; //최대 10개
+        if(imageListLength + filesLength > 10) {
+            alert('이미지는 10장을 초과할 수 없습니다.');
+            return;
+        }
 
+        //프리뷰
+        for (let i=0; i<filesLength; i++){
+            let newImage = await resize.handleResize(fileArr[i]);
+            SetImageList((imageList) => [...imageList, newImage]);
+        }
+        e.target.value = '';
 
-    const onAddWrite = () => {
-    }
+        SetContentList([...contentList,]);
+    };
 
-    function onWrite() {
-        axios.post('/api/posts',
-            JSON.stringify({
-                title: title,
-                content: content,
-            }),
-            {
-                headers:
-                    {"Content-Type": 'application/json'}
-            }).then((res) => {
-            alert("글을 등록하였습니다");
-            console.log(res.data);
-            window.location.href = '/main';
-        }).catch(error => {
-            console.log("실패");
-        });
-        axios.post('/pictures',
-            JSON.stringify({
-                postId: 1,
-                pictureUrl: image,
-                pictureContent: content1
-            }),
-            {
-                headers:
-                    {"Content-Type": 'application/json'}
-            }).then((res) => {
-            console.log(res.data);
-            window.location.href = '/main';
-        }).catch(error => {
-            console.log("실패");
-        });
-    }
+    function preSubmit() {};
 
-    const setPreviewImg = (event) => {
-
-        let reader = new FileReader();
-        reader.onload = function(event) {
-            setImage(event.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
+    function finalSubmit() {};    
 
     return (
         <Wrapper>
             <Container>
-                <TextArea
-                    type="text" value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
-                    autoSize={{minRows: 1, maxRows: 1}}/>
-                <TextArea
-                    type="text" value={content}
-                    onChange={(e) => {
-                        setContent(e.target.value);
-                    }}
-                    autoSize={{minRows: 1, maxRows: 1}}/>
+            <TextArea
+                type="text" value={title}
+                onChange={(e) => {
+                    SetTitle(e.target.value);
+                }}
+                autoSize={{ minRows: 1, maxRows: 1}}/>
 
-                <div>
-                    <input type="file" id="image" accept="image/*"
-                           style={{border: "solid 1px lightgray", borderRadius: "5px"}}
-                           onChange={setPreviewImg}/>
-                    <br></br>
-                    <img src={image} style={{maxWidth:"500px"}}></img>
-                    <TextArea
-                        type="text" value={content1}
-                        onChange={(e) => {
-                            setContent1(e.target.value);
-                        }}
-                        autoSize={{minRows:3, maxRows:3}}/>
-                </div>
-                <div>
-                    <input type="file" id="image" accept="image/*"
-                           style={{border: "solid 1px lightgray", borderRadius: "5px"}}
-                           onChange={setPreviewImg}/>
-                    <br></br>
-                    <img src={image} style={{maxWidth:"500px"}}></img>
-                    <TextArea
-                        type="text" value={content1}
-                        onChange={(e) => {
-                            setContent1(e.target.value);
-                        }}
-                        autoSize={{minRows:3, maxRows:3}}/>
-                </div>
+                <input
+                    type="file"
+                    id="upload-file"
+                    accept="image/*"
+                    multiple
+                    onChange={uploadFile}/>
+                <Images imageList={imageList} getImageList={getImageList} contentList={contentList} SetContentList={SetContentList}/>
+                </Container> 
 
-                <Button
-                    type="submit"
-                    variant="outlined"
-                    sx={{ //css 적용
-                        mt: 3,
-                        pr: 11,
-                        pl: 11,
-                        color: 'white',
-                        border: '1px solid skyblue',
-                        borderRadius: '10px',
-                        backgroundColor: 'skyblue',
-                        // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
-                        // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
-                        "&.MuiButton-root:hover": {
-                            color: 'skyblue',
-                            borderColor: 'skyblue'
-                        }
-                    }}
-                    onClick={onAddWrite}>글 추가
-                </Button>
+                <WrapperBtn>
+                <Button 
+                type="submit" 
+                variant="outlined" 
+                sx={{ //css 적용
+                    mt: 3,
+                    pr: 11,
+                    pl: 11,
+                    color: 'white',
+                    border: '1px solid skyblue',
+                    borderRadius: '10px',
+                    backgroundColor: 'skyblue',
+                    // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
+                    // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
+                    "&.MuiButton-root:hover":{
+                    color: 'skyblue',
+                    borderColor: 'skyblue'
+                    }
+                }}
+                onClick={() => {preSubmit()}}>임시 저장</Button>
 
-                <Button
-                    type="button"
-                    variant="outlined"
-                    sx={{ //css 적용
-                        mt: 3,
-                        pr: 11,
-                        pl: 11,
-                        color: 'white',
-                        border: '1px solid skyblue',
-                        borderRadius: '10px',
-                        backgroundColor: 'skyblue',
-                        // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
-                        // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
-                        "&.MuiButton-root:hover": {
-                            color: 'skyblue',
-                            borderColor: 'skyblue'
-                        }
-                    }}
-                    onClick={onWrite}>글 올리기</Button>
-
-            </Container>
+                <Button 
+                type="submit" 
+                variant="outlined" 
+                sx={{ //css 적용
+                    mt: 3,
+                    pr: 11,
+                    pl: 11,
+                    color: 'white',
+                    border: '1px solid skyblue',
+                    borderRadius: '10px',
+                    backgroundColor: 'skyblue',
+                    // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
+                    // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
+                    "&.MuiButton-root:hover":{
+                    color: 'skyblue',
+                    borderColor: 'skyblue'
+                    }
+                }}
+                onClick={() => {finalSubmit()}}>글 올리기</Button>
+                </WrapperBtn>
         </Wrapper>
     );
 }
