@@ -24,6 +24,8 @@ const StyledDivider = styled(Divider)({
 })
 
 
+
+
 function SettingPage(props) {
     
     const [email, setEmail] = useState("1@gmail.com");
@@ -200,11 +202,28 @@ function SettingPage(props) {
                         </FormControl>
                         <FormControl sx={{marginTop: '20px'}}>
                             <label style={{color: 'rgba(0,0,0,0.80)', marginBottom: '10px'}}>프로필 음악</label>
-                            <OutlinedInput 
+                            
+                            
+                            <TextField
                                 name="music"
                                 value={music}
+                                multiline
+                                maxRows={2}
                                 onChange={(e) => onChangeInputs(e)}
-                            /> 
+                            />
+                            <div
+                            style={{
+                                fontSize : '0.3vw',
+                                color : 'grey'
+                            }}>
+                        
+                                재생 할 유튜브의 video ID를 입력해주세요. 
+                                video ID는 유튜브 주소의 v= 뒤에 붙는 코드입니다.
+                                <br/>
+                                ex : https://www.youtube.com/watch?v=AE3ce8F868k 의 video ID =AE3ce8F868k
+                            </div>
+                            
+                        
                         </FormControl>
                     </Box> 
                     <Button variant="outlined" onClick={onChangeData}>수정</Button>

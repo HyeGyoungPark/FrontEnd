@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from '@mui/material';
 import { Input } from "antd"
+
 import * as resize from "../ui/resize.js"
 import Images from "./WriteImage"
+import axios from "axios";
+
 
 //화면의 중앙에 위치시킴
 const Wrapper = styled.div`
-    padding: 16px;
-    width: calc(100% - 32px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  padding: 16px;
+  width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const WrapperBtn = styled.div`
@@ -25,20 +28,18 @@ const WrapperBtn = styled.div`
 `;
 
 const Container = styled.div`
-    width: 100%;
-    max-width: 720px;
-
-    & > * {
-        :not(:last-child) {
-            margin-bottom: 16px;
-        }
+  width: 100%;
+  max-width: 720px;
+  & > * {
+    :not(:last-child) {
+      margin-bottom: 16px;
     }
+  }
 `;
 
 const { TextArea } = Input
 
 function WritePage(props) {
-
     const [title, SetTitle] = useState("");
     const [imageList, SetImageList] = useState([]);
     const [contentList, SetContentList] = useState([]);
@@ -69,7 +70,6 @@ function WritePage(props) {
     function preSubmit() {};
 
     function finalSubmit() {};    
-
 
     return (
         <Wrapper>

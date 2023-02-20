@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useMediaQuery } from 'react-responsive';
 import MainPageContent from '../ui/main/MainPageContent';
+import {Link} from "react-router-dom";
+import axios from "axios";
 import '../ui/main/MainPageContent.css';
-
 
 function MainPage(props) {
 
@@ -25,18 +26,49 @@ function MainPage(props) {
     const isSmall = useMediaQuery({
         query : "(max-width:649px)"
     });
-    
-    return (
-        <div
-            className="box" // 세로 scroll과는 달리 가로 scroll은 상위 tag에 해주어야 함
-        >
-            {isFull && <MainPageContent style={{ marginTop: '0.2%' }}> </MainPageContent>}
-            {isLarge && <MainPageContent style={{ marginTop: '0.5%' }}></MainPageContent>}
-            {isLargeMedium && <MainPageContent style={{ marginTop: '1%' }}></MainPageContent>}
-            {isMedium && <MainPageContent style={{ marginTop: '2%' }}></MainPageContent>}
-            {isSmall && <MainPageContent style={{ marginTop: '3%' }}></MainPageContent>}
-        </div>
-    );
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/posts/list")
+            .then(res => {
+                setData(res.data);
+            })
+    }, []);
+
+    if (data) {
+        let urlList = [];
+        for (let i=0; i<data.length ; i++) {
+            urlList.push('/posts/'+data[i].id);
+        }
+
+        const postList = urlList.map((u, index) =>
+            <Link to={u} >[제목]{data[index].title}</Link> );
+
+        return (
+            <div className='box'>
+                <>
+                    {postList}
+                </>
+                {isFull && <MainPageContent style={{marginTop: '0.2%'}}> </MainPageContent>}
+                {isLarge && <MainPageContent style={{marginTop: '2%'}}></MainPageContent>}
+                {isLargeMedium && <MainPageContent style={{marginTop: '3.3%'}}></MainPageContent>}
+                {isMedium && <MainPageContent style={{marginTop: '6%'}}></MainPageContent>}
+                {isSmall && <MainPageContent style={{marginTop: '8%'}}></MainPageContent>}
+            </div>
+        );
+    } else {
+        return (
+            <div className='box'>
+                {isFull && <MainPageContent style={{marginTop: '0.2%'}}> </MainPageContent>}
+                {isLarge && <MainPageContent style={{marginTop: '2%'}}></MainPageContent>}
+                {isLargeMedium && <MainPageContent style={{marginTop: '3.3%'}}></MainPageContent>}
+                {isMedium && <MainPageContent style={{marginTop: '6%'}}></MainPageContent>}
+                {isSmall && <MainPageContent style={{marginTop: '8%'}}></MainPageContent>}
+            </div>
+        );
+    }
+
 }
 
 export default MainPage;
