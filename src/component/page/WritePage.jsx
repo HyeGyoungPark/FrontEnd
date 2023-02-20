@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import TextInput from "../ui/TextInput";
-import CommentBox from "../ui/CommentBox";
 import { Button } from '@mui/material';
-import { CountertopsSharp } from "@mui/icons-material";
-import DetailList from "../list/DetailList"
 import { Input } from "antd"
+import * as resize from "../ui/resize.js"
+import Images from "./WriteImage"
 
 //화면의 중앙에 위치시킴
 const Wrapper = styled.div`
@@ -14,6 +11,15 @@ const Wrapper = styled.div`
     width: calc(100% - 32px);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+const WrapperBtn = styled.div`
+    padding: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 `;
@@ -29,68 +35,81 @@ const Container = styled.div`
     }
 `;
 
-const CreateListDiv = styled.div`
-  padding: 3rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`
-
-/*const CreateList = () => {
-    const [countList, setCountList] = useState([0])
-
-    function onAddWrite(){
-        let countArr = [...countList]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        CountertopsSharp.push(counter)
-        setcountList(countArr)
-
-    }    
-}
-
-<TextInput>
-                    {props.countList && props.countList.map((item, i) => (
-                        <div key={i}>
-                        height={480}
-                        value={content}
-                        placeholder={'내용을 입력하세요'}
-                        onChange={(event) => {
-                            setContent(event.target.value);
-                        }}
-                    </div>
-                    ))}
-                </TextInput>
-*/
-
 const { TextArea } = Input
 
 function WritePage(props) {
-    const navigate = useNavigate();
 
     const [title, SetTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [imageList, SetImageList] = useState([]);
+    const [contentList, SetContentList] = useState([]);
 
-    const [countList, setCountList] = useState([0])
+    const getImageList = (newImageList) => {
+        SetImageList(newImageList);
+    };
 
-    const onAddWrite = () => {
-        let countArr = [...countList]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        countArr.push(counter)
-        setCountList(countArr)
-    }
+    const uploadFile = async (e) => {
+        let fileArr = e.target.files;
+        let imageListLength = imageList.length;
+        let filesLength = fileArr.length > 10 ? 10 : fileArr.length; //최대 10개
+        if(imageListLength + filesLength > 10) {
+            alert('이미지는 10장을 초과할 수 없습니다.');
+            return;
+        }
+
+        //프리뷰
+        for (let i=0; i<filesLength; i++){
+            let newImage = await resize.handleResize(fileArr[i]);
+            SetImageList((imageList) => [...imageList, newImage]);
+        }
+        e.target.value = '';
+
+        SetContentList([...contentList,]);
+    };
+
+    function preSubmit() {};
+
+    function finalSubmit() {};    
+
 
     return (
         <Wrapper>
             <Container>
             <TextArea
+                type="text" value={title}
+                onChange={(e) => {
+                    SetTitle(e.target.value);
+                }}
                 autoSize={{ minRows: 1, maxRows: 1}}/>
-            <CreateListDiv>
-                <DetailList countList={countList}/>
-            </CreateListDiv>
-            
+
+                <input
+                    type="file"
+                    id="upload-file"
+                    accept="image/*"
+                    multiple
+                    onChange={uploadFile}/>
+                <Images imageList={imageList} getImageList={getImageList} contentList={contentList} SetContentList={SetContentList}/>
+                </Container> 
+
+                <WrapperBtn>
+                <Button 
+                type="submit" 
+                variant="outlined" 
+                sx={{ //css 적용
+                    mt: 3,
+                    pr: 11,
+                    pl: 11,
+                    color: 'white',
+                    border: '1px solid skyblue',
+                    borderRadius: '10px',
+                    backgroundColor: 'skyblue',
+                    // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
+                    // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
+                    "&.MuiButton-root:hover":{
+                    color: 'skyblue',
+                    borderColor: 'skyblue'
+                    }
+                }}
+                onClick={() => {preSubmit()}}>임시 저장</Button>
 
                 <Button 
                 type="submit" 
@@ -110,56 +129,8 @@ function WritePage(props) {
                     borderColor: 'skyblue'
                     }
                 }}
-                onClick={onAddWrite}>글 추가
-                </Button>
-                
-                <Button 
-                type="submit" 
-                variant="outlined" 
-                sx={{ //css 적용
-                    mt: 3,
-                    pr: 11,
-                    pl: 11,
-                    color: 'white',
-                    border: '1px solid skyblue',
-                    borderRadius: '10px',
-                    backgroundColor: 'skyblue',
-                    // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
-                    // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
-                    "&.MuiButton-root:hover":{
-                    color: 'skyblue',
-                    borderColor: 'skyblue'
-                    }
-                }}
-                onClick={() => {
-                    navigate("/main");
-                }}>임시 저장</Button>
-
-                <Button 
-                type="submit" 
-                variant="outlined" 
-                sx={{ //css 적용
-                    mt: 3,
-                    pr: 11,
-                    pl: 11,
-                    color: 'white',
-                    border: '1px solid skyblue',
-                    borderRadius: '10px',
-                    backgroundColor: 'skyblue',
-                    // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
-                    // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
-                    "&.MuiButton-root:hover":{
-                    color: 'skyblue',
-                    borderColor: 'skyblue'
-                    }
-                }}
-                onClick={() => {
-                    navigate("/main");
-                }}>글 올리기</Button>
-
-                <CommentBox></CommentBox>
-                
-            </Container>
+                onClick={() => {finalSubmit()}}>글 올리기</Button>
+                </WrapperBtn>
         </Wrapper>
     );
 }
