@@ -1,4 +1,3 @@
-
 import img1 from './image/first.jpg';
 import img2 from './image/2.jpg';
 import img3 from './image/3.jpg';
@@ -43,6 +42,24 @@ const img = [
         email: "1@gmail.com",
     },
     {   id : 7, 
+        image :  [null] , 
+        title : '...', 
+        desc: ['내용 추가!'],
+        email: "1@gmail.com",
+    },
+    {   id : 8, 
+        image :  [null] , 
+        title : '...', 
+        desc: ['내용 추가!'],
+        email: "1@gmail.com",
+    },
+    {   id : 9, 
+        image :  [null] , 
+        title : '...', 
+        desc: ['내용 추가!'],
+        email: "1@gmail.com",
+    },
+    {   id : 10, 
         image :  [null] , 
         title : '...', 
         desc: ['내용 추가!'],

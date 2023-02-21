@@ -4,6 +4,7 @@ import SidebarHeader from "../ui/sidebar/SidebarHeader";
 import SidebarSearch from "../ui/sidebar/SidebarSearch";
 import SidebarFriendItem from "../ui/sidebar/SidebarFriendItem";
 import SidebarItem from "../ui/sidebar/SidebarItem";
+import Logout from '../ui/logout/Logout';
 
 function Sidebar(){
     
@@ -78,6 +79,17 @@ function Sidebar(){
                             }
                         })}
                     </List>
+
+                    <div
+                        style={{
+                            position: 'absolute',
+                            bottom: '3%',
+                            right: '3%'
+                        }}
+                    >
+                        <Logout/>
+                    </div>
+
                 </Drawer>
             </Box>
     );

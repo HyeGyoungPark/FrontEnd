@@ -7,11 +7,13 @@ import HiddenContentBox from "./HiddenContentBox";
 import img from '../../page/main/images';
 import CommentBox from "../CommentBox"
 import postData from "../../../postData.json";
-
 import ProfileImage from '../ProfileImage';
 import MusicBox from "../MusicBox";
 import ProfileContents from "../ProfileContents";
 import YouTubePlayer from "../YoutubePlayer";
+import LeftArrow from "../arrow/LeftArrow";
+import RightArrow from "../arrow/RightArrow";
+import GalleryList from "../../page/main/gallery/GalleryList";
 
 function ContentGrid(){
 
@@ -89,22 +91,47 @@ function ContentGrid(){
                                 width: '100%',
                                 height: '84vh',
                                 border: '1px solid skyblue',
-                                padding : '1%'
+                                //padding : '1%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
                             }}
                         >
+                            <LeftArrow/>
+                            <Box
+                                sx={{
+                                    width: '100%',
+                                    height: '60vh',
+                                    padding: '1%',
+                                    //border: '1px solid red',
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}
+                            >
+                                <Grid container spacing={2}>
+                                    {/* 하위 component로 전달할 함수 매개변수로 주기 */}
 
-                            <Grid container spacing={2}>
-                                {/* 하위 component로 전달할 함수 매개변수로 주기 */}
+                                    {/*서버통신할 때 사용 
+                                    <ContentBox Move={Move} post={posts}></ContentBox>
+                                    */}
 
-                                {/*서버통신할 때 사용 
-                                <ContentBox Move={Move} post={posts}></ContentBox>
-                                */}
-
-                                {/* map 함수를 사용해야 data가 1개씩 전달됨 & data수만큼 글 생성 */}
-                                { img.map((img) => (
-                                   <ContentBox Move={Move} onView={onView} setId={setId} key={img.id} img={img} {...img}></ContentBox>  
-                                ))}
-                            </Grid>
+                                    {/* map 함수를 사용해야 data가 1개씩 전달됨 & data수만큼 글 생성 */}
+                                    { img.map((img) => (
+                                    <ContentBox Move={Move} onView={onView} setId={setId} key={img.id} img={img} {...img}></ContentBox>  
+                                    ))}
+                                </Grid>
+                                <Box
+                                    sx={{
+                                        width: '100%',
+                                        border: '1px solid green',
+                                        marginTop: '3%',
+                                        textAlign: 'center'
+                                    }}
+                                >
+                                    <GalleryList/>
+                                </Box>
+                            </Box>
+                            <RightArrow />
                         </Box>
                     </Grid>
                 </Grid>
