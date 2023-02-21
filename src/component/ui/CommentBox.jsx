@@ -14,7 +14,7 @@ const CommentLabel = styled.p`
 `
 const Wrapper = styled.div`
     padding: 16px;
-    width: calc(100% - 32px);
+    width: calc(40% - 32px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,12 +22,15 @@ const Wrapper = styled.div`
 `;
 
 const Commentdata = styled.div`   //작성된 댓글 스크롤바 보이지않게 하기
+    padding: 1px;
     overflow: scroll;
     &::-webkit-scrollbar{
         display: none;
     }
 `
-
+const ContentText = styled.p`
+    font-size: 14px;
+`;
 
 const { TextArea } = Input
 
@@ -50,24 +53,26 @@ function CommentBox(props) {
             <CommentList comments={postcomment.comments}></CommentList>
         </Commentdata>
         
-        
-        <TextArea 
-            value={comment}
-            onChange={(event) => {setComment(event.target.value)}}
-            autoSize={{minRows: 2, maxRows: 2}}
-        />
+        <ContentText>
+            <TextArea 
+                value={comment}
+                onChange={(event) => {setComment(event.target.value)}}
+                autoSize={{minRows: 2, maxRows: 4}}
+            />
+        </ContentText>
 
         <Button 
                 type="submit" 
                 variant="outlined" 
                 sx={{ //css 적용
                     mt: 3,
-                    pr: 11,
-                    pl: 11,
+                    pr: 2,
+                    pl: 2,
                     color: 'white',
                     border: '1px solid skyblue',
                     borderRadius: '8px',
                     backgroundColor: 'skyblue',
+                    float: 'right',
                     // "&.Mui[mui이름]-root:[event 속성]" : {}로 기본적으로 적용된 css를 변경시킬 수 있다.
                     // "&.MuiButton-root:hover" : {}로 기본적으로 탑재되어있는 css를 바꿈
                     "&.MuiButton-root:hover":{
@@ -77,7 +82,8 @@ function CommentBox(props) {
                 }}
                 onClick={() => {
                     navigate("");
-                }}>댓글 작성하기</Button>
+                }}>작성</Button>
+
     </Box>
     </Wrapper>
 );
