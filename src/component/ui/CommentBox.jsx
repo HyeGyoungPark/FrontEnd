@@ -14,7 +14,7 @@ const CommentLabel = styled.p`
 `
 const Wrapper = styled.div`
     padding: 16px;
-    width: calc(40% - 32px);
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +57,7 @@ function CommentBox(props) {
             <TextArea 
                 value={comment}
                 onChange={(event) => {setComment(event.target.value)}}
-                autoSize={{minRows: 2, maxRows: 4}}
+                autoSize={{minRows: 1, maxRows: 4}}
             />
         </ContentText>
 

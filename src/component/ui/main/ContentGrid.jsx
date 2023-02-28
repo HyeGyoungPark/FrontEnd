@@ -8,7 +8,6 @@ import img from '../../page/main/images';
 import CommentBox from "../CommentBox"
 import postData from "../../../postData.json";
 import ProfileImage from '../ProfileImage';
-import MusicBox from "../MusicBox";
 import ProfileContents from "../ProfileContents";
 import YouTubePlayer from "../YoutubePlayer";
 import LeftArrow from "../arrow/LeftArrow";
@@ -79,7 +78,6 @@ function ContentGrid(){
 
                             <ProfileImage/>     {/* 프사 */}
                             <ProfileContents/>
-                            <MusicBox />
                             <YouTubePlayer/>
                            
 
@@ -152,9 +150,11 @@ function ContentGrid(){
                         //ref={move}
                     >
                         <Button
+                            size="small"
                             style={{
                                 float: 'right',
-                                margin: '0.5%',
+                                //margin: '0.01%',
+                                
                                 padding: 0
                             }}
                             ref={move} //이런 입력 , button component에만 적용됨
@@ -162,10 +162,25 @@ function ContentGrid(){
                         >
                             X
                         </Button>
-                        <div style={{display: 'flex'}}>
-                        <HiddenContentBox data={data}></HiddenContentBox>
-                        <CommentBox data={postData}></CommentBox>
-                        </div>
+
+
+                        <Grid container spacing={2}>
+                            <Grid item xs={7}>
+                                <HiddenContentBox data={data} ></HiddenContentBox>
+
+                            </Grid>
+                            <Grid item xs={5}>
+                                <CommentBox data={postData} ></CommentBox>
+
+                            </Grid>
+
+                        </Grid>
+
+                        {/* <div style={{display: 'flex'}}>
+                            
+                            
+                        
+                        </div> */}
                     </Box>
                 </Grid>
             }
