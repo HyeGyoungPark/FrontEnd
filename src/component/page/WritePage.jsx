@@ -49,7 +49,6 @@ const WrapperBtn = styled.div`
     background-color: white;
 
 `;
-//   border: 1px solid blue;
 
 
 const Container = styled.div`
@@ -97,9 +96,6 @@ function WritePage(props) {
             return;
         }
 
-//        setContentList([...contentList, {id: contents.id, content:contents.content}]);
-
-  //      contentArray.push({id:contents.id, content:contents.content})
 
         console.log("arrray: ", contentArray);
 
@@ -108,13 +104,8 @@ function WritePage(props) {
             let newImage = await resize.handleResize(fileArr[i]);
             setImageList((imageList) => [...imageList, newImage]);
 
-            //let newContent = contentList[i];
-            //setContentList((contentList) => [...contentList, newContent]);
         }
         e.target.value = '';
-
-        //setContentList([...contentList, {id: contents.id, content:contents.content}]);
-        //contentArray.push({id:contents.id, content:contents.content});
 
         console.log(imageList);
         console.log(contentList);
@@ -132,45 +123,24 @@ function WritePage(props) {
 
     const handleChange = (index, e) => {
         if(e.target.name === "contentinput") {
+            
             let newContent = new Object();
             newContent.id=index;
             newContent.content=contentChange;
             console.log(newContent); //{id: , content: }
             setContentList([newContent, ...contentList]);
-            /*
-            const newpreContent = [...contentList];
-            newpreContent[index%date] = contentChange;
-            console.log(date);
-            const newContent = [...contentList];
-            
-            for(let i=0; i<newpreContent.length; i++){
-                if(newpreContent[i] !== undefined){
-                    newContent[n] = newpreContent[i];
-                    n++;
-                }
-            }
-            setContentList([...newContent]);
-            newContent = [];
-            n=0;
-        */
         }
-        /*let newContent = new Object();
-        newContent.id=e.target.id;
-        newContent.content=e.target.value;
-        //console.log(newContent); {id: , content: }
-        setContents(newContent);
-        */
     };
 
 
-    const onChangeContent = (e) => {        
+    const onChangeContent = (index, e) => {        
         setContentChange(e.target.value);
+        let newContentList = contentList.filter((content) => content.id != index );
+        getContentList(newContentList);
     }
 
     function onWrite() {
-        //console.log(contents); //contents 에는 마지막 말이 잘 들어감
-        //SetContentList([...contentList, contents]); //왜인지는 모르겠지만 contents가 안들어감..
-    
+
         console.log(imageList);
         console.log(contentList);
 
@@ -259,7 +229,7 @@ function WritePage(props) {
                         style = {{border : "1px solid skyblue", padding : "1px 1px 10px 1px", width : "90%"}}>
                             <WrapperInside>
                             <img alt={image.id} src={image.url} style = {{width : "50%", padding : "0.5vw 0.5vw 0vw 0.5vw"}}/>
-                            <TextArea type="text" id={image.id} name="contentinput" onBlur={(event) => handleChange(image.id, event) }onChange = {(event) => onChangeContent(event)} autoSize={{ minRows: 10, maxRows: 10}}style = {{width : "50%", padding : "0.5vw 0.5vw 0vw 0.5vw"}}/>
+                            <TextArea type="text" id={image.id} name="contentinput" onBlur={(event) => handleChange(image.id, event) }onChange = {(event) => onChangeContent(image.id, event)} autoSize={{ minRows: 10, maxRows: 10}}style = {{width : "50%", padding : "0.5vw 0.5vw 0vw 0.5vw"}}/>
                             </WrapperInside>
                             <Button2 onClick={() => removeImage(image.id, content.id)}>삭제</Button2>
                         </div>
