@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import styled from "styled-components";
 
 
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 `;
@@ -31,12 +31,14 @@ const Images = ({ imageList, getImageList, contentList, setContentList}) => {
 
     return imageList.map((image, index) => { 
         return(
-                <div key={image.id}>
+                <div key={image.id}
+                style = {{border : "1px solid skyblue", padding : "1px 1px 10px 1px", width : "90%"}}>
                     <Wrapper>
-                        <img alt={image.id} src={image.url}/>
-                        <TextArea type="text" id={image.id} onChange = {e => handleChange(e)} autoSize={{ minRows: 1, maxRows: 4}}/>
-                        <button onClick={() => removeImage(image.id)}>삭제</button>
+                        <img alt={image.id} src={image.url} style = {{width : "50%", padding : "0.5vw 0.5vw 0vw 0.5vw"}}/>
+                        <TextArea type="text" id={image.id} onChange = {e => handleChange(e)} autoSize={{ minRows: 10, maxRows: 10}}style = {{width : "50%", padding : "0.5vw 0.5vw 0vw 0.5vw"}}/>
+                        
                     </Wrapper>
+                    <Button onClick={() => removeImage(image.id)}>삭제</Button>
                 </div>
         );
     });

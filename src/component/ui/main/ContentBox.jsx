@@ -12,7 +12,7 @@ function ContentBox(props){ // 상위 component에서 전달한 이름 그대로
     const [visible2, setVisible2] = useState(true);
 
     return(
-        <Grid item xs={12} sm={2.4}>
+        <Grid item xs={12} sm={3}>
             <Box
                 sx={{
                     width: '100%',

@@ -11,13 +11,17 @@ import { Button as Button2 } from "antd"
 import imageCompression from 'browser-image-compression'
 import * as resize from "../ui/resize.js"
 import axios from "axios";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar.jsx";
+import React, { useState , useRef } from "react";
+import Images from "./WriteImage";
 import { width } from "@mui/system";
 
 //화면의 중앙에 위치시킴
+
 const Wrapper = styled.div`
   padding: 16px;
   width: calc(100% - 32px);
+  height : flex;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +48,9 @@ const WrapperBtn = styled.div`
     align-items: center;
     justify-content: center;
     background-color: white;
+
 `;
+//   border: 1px solid blue;
 
 
 const Container = styled.div`
@@ -52,14 +58,12 @@ const Container = styled.div`
     border: 1px solid black;
     background-color: white;
     max-width: 720px;
-
   & > * {
     :not(:last-child) {
       margin-bottom: 16px;
     }
   }
 `;
-
 
 const { TextArea } = Input
 

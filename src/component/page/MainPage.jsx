@@ -51,20 +51,20 @@ function MainPage(props) {
                     {postList}
                 </>
                 {isFull && <MainPageContent style={{marginTop: '0.2%'}}> </MainPageContent>}
-                {isLarge && <MainPageContent style={{marginTop: '2%'}}></MainPageContent>}
-                {isLargeMedium && <MainPageContent style={{marginTop: '3.3%'}}></MainPageContent>}
-                {isMedium && <MainPageContent style={{marginTop: '6%'}}></MainPageContent>}
-                {isSmall && <MainPageContent style={{marginTop: '8%'}}></MainPageContent>}
+                {isLarge && <MainPageContent style={{marginTop: '0.5%'}}></MainPageContent>}
+                {isLargeMedium && <MainPageContent style={{marginTop: '1%'}}></MainPageContent>}
+                {isMedium && <MainPageContent style={{marginTop: '1/5%'}}></MainPageContent>}
+                {isSmall && <MainPageContent style={{marginTop: '2%'}}></MainPageContent>}
             </div>
         );
     } else {
         return (
             <div className='box'>
                 {isFull && <MainPageContent style={{marginTop: '0.2%'}}> </MainPageContent>}
-                {isLarge && <MainPageContent style={{marginTop: '2%'}}></MainPageContent>}
-                {isLargeMedium && <MainPageContent style={{marginTop: '3.3%'}}></MainPageContent>}
-                {isMedium && <MainPageContent style={{marginTop: '6%'}}></MainPageContent>}
-                {isSmall && <MainPageContent style={{marginTop: '8%'}}></MainPageContent>}
+                {isLarge && <MainPageContent style={{marginTop: '0.5%'}}></MainPageContent>}
+                {isLargeMedium && <MainPageContent style={{marginTop: '1%'}}></MainPageContent>}
+                {isMedium && <MainPageContent style={{marginTop: '1.5%'}}></MainPageContent>}
+                {isSmall && <MainPageContent style={{marginTop: '2%'}}></MainPageContent>}
             </div>
         );
     }

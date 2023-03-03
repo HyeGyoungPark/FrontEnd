@@ -22,7 +22,7 @@ export const SearchInput = styled(InputBase)({
 
 export const NestedBox = styled(Collapse)({
     overflowY : "auto",
-    maxHeight: "57vh",
+    maxHeight: "48vh",
     "&::-webkit-scrollbar" :{
         width: 0,
     }

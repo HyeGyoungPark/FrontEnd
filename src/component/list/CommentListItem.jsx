@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-    width: calc(100% - 32px);
+    width: 27vw;
     padding: 1px;
     display: flex;
     flex-direction: column;
@@ -19,16 +19,21 @@ const Wrapper = styled.div`
 `;
 
 const ContentText = styled.p`
-    font-size: 14px;
+    font-size: 0.8vw;
 `;
 
 function CommentListItem(props) {
     const { comment } = props;
 
     return (
-        <Wrapper>
+        <div>
+            <div> hi</div>
+            <Wrapper>
+            
             <ContentText>{ comment.content }</ContentText>
         </Wrapper>
+        </div>
+        
     );
 }
 
