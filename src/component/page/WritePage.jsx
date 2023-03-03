@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styled from "styled-components";
 import {useNavigate, useParams} from "react-router-dom";
 import TextInput from "../ui/TextInput";
@@ -12,7 +12,6 @@ import imageCompression from 'browser-image-compression'
 import * as resize from "../ui/resize.js"
 import axios from "axios";
 import Sidebar from "./Sidebar.jsx";
-import React, { useState , useRef } from "react";
 import Images from "./WriteImage";
 import { width } from "@mui/system";
 
