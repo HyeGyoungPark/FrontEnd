@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 const { TextArea } = Input
 
-const Images = ({ imageList, getImageList, contentList, SetContentList}) => {
+const Images = ({ imageList, getImageList, contentList, setContentList}) => {
     const removeImage = (id) => {
         let newList = imageList.filter((image) => image.id !== id);
         getImageList(newList);
@@ -26,7 +26,7 @@ const Images = ({ imageList, getImageList, contentList, SetContentList}) => {
     const handleChange = (e) => {
         const list = [...contentList];
         list[e.target.id] = e.target.value;
-        SetContentList(list);
+        setContentList(list);
     };
 
     return imageList.map((image, index) => { 
