@@ -1,9 +1,11 @@
 import { Favorite } from '@mui/icons-material';
 import { Card, CardActions, CardMedia, IconButton, Box } from '@mui/material';
 import React, {useState} from 'react';
+import PostDialog from './friend/PostDialog';
 
 function FriendListItem(props) {
-    const {item, onClick} = props;
+    const {item, setSelect} = props;
+    
     const [toggle, setToggle] = useState(false);
 
     return (
@@ -14,7 +16,7 @@ function FriendListItem(props) {
                 height="200"
                 image={item.image[0]}
                 onError={e => {e.currentTarget.style.visibility = 'hidden'}}
-                onClick={onClick}
+                onClick={() => setSelect(item.id)}
             />
             <CardActions>
                 <IconButton>
@@ -24,7 +26,7 @@ function FriendListItem(props) {
                     />
                 </IconButton>
             </CardActions>
-        </Card>
+            </Card>
         </Box>
         
     );
