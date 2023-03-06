@@ -33,11 +33,12 @@ function ContentGrid(){
     const [id, setId] = useState();
     const [data, setData] = useState(img[0]); //초기 data
 
+    
+
     const onView = (id) => { //contentBox에서 선택한 id와 같은 id의 data 찾기 
         setData(img.find(item => item.id === id))
     }
 
-    
 
     /* 나중에 서버통신할 때 사용
     const [posts, setPosts] = useState([]); 
@@ -112,11 +113,13 @@ function ContentGrid(){
                                     {/*서버통신할 때 사용 
                                     <ContentBox Move={Move} post={posts}></ContentBox>
                                     */}
+                                    
 
                                     {/* map 함수를 사용해야 data가 1개씩 전달됨 & data수만큼 글 생성 */}
                                     { img.map((img) => (
                                     <ContentBox Move={Move} onView={onView} setId={setId} key={img.id} img={img} {...img}></ContentBox>  
                                     ))}
+                                    
                                 </Grid>
                                 <Box
                                     sx={{
@@ -170,8 +173,8 @@ function ContentGrid(){
 
                             </Grid>
                             <Grid item xs={5}>
-                                <CommentBox data={postData} ></CommentBox>
-
+                                
+                                <CommentBox Id={data.id} data={ postData } ></CommentBox>
                             </Grid>
 
                         </Grid>

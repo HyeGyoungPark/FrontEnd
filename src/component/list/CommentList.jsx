@@ -35,11 +35,8 @@ function CommentList(props) {
     return (
         <Nav>
             <Wrapper>
-            <div>
-                hi
-            </div>
             {comments?.map((comment, index) => {
-                return <CommentListItem key={comment.id} comment={comment} />
+                return <CommentListItem key={comment.email} comment={comment} />
             })}
         </Wrapper>
         </Nav>
