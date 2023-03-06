@@ -35,12 +35,15 @@ const ContentText = styled.p`
 const { TextArea } = Input
 
 function CommentBox(props) {
+    const { Id, data } = props;
+    
     const navigate = useNavigate();
-    const { postId } = useParams();
 
-    const postcomment = postdata.find((item) => {
-        return item.id == postId;
+    const postcomment = data.find((item) => {  //postid에 대응하는 코멘트 id 찾기
+        return item.post_id === Id;
     });
+
+    console.log(props);
 
     const [comment, setComment] = useState("");
     

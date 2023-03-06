@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import data from "../../data.json";
 
 const Wrapper = styled.div`
     width: 27vw;
@@ -18,18 +19,37 @@ const Wrapper = styled.div`
 
 `;
 
+const ProfileId = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+`;
+
 const ContentText = styled.p`
     font-size: 0.8vw;
 `;
 
+
+
+
+
 function CommentListItem(props) {
     const { comment } = props;
 
-    return (
+    const person = data.find((person) => {
+        return person.email === comment.email;
+      });
+    
+      return (
         <div>
-            <div> hi</div>
-            <Wrapper>
+            <ProfileId>
+            <img src={person.image}
+                style={{ margin: "0.05vw", width: "1vw", height: "1vw" }}
+            ></img>
+            <div> { comment.email } </div>
+            </ProfileId>
             
+            <Wrapper>
             <ContentText>{ comment.content }</ContentText>
         </Wrapper>
         </div>
