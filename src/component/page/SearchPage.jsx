@@ -3,12 +3,12 @@ import Sidebar from './Sidebar';
 import { Box, Select, FormControl, MenuItem, Pagination } from '@mui/material';
 import { Container } from '@mui/system';
 import { SearchRounded } from '@mui/icons-material';
-import { useNavigate } from "react-router-dom";
 import SearchList from '../list/SearchList';
 import data from "../../data.json"
-import { useStore, useSideState, useVisible } from "../ui/CustomHooks";
+import { useStore, useSideState } from "../ui/CustomHooks";
 import { Search, SearchIconWrapper, SearchInput, StyledTabs, StyledResultText, 
     StyledTab, TabPanel } from "../ui/StyledSearchPage.jsx";
+import PostDialog from '../ui/friend/PostDialog';
 import posts from "./main/images";
 
 function SearchPage(props) {
@@ -28,8 +28,15 @@ function SearchPage(props) {
     const [resultTitleTotal, setResultTitleTotal] = useState([]); //제목 전체 검색 결과
     const [resultUser, setResultUser] = useState([]); //사용자 검색 결과
 
-    const navigate = useNavigate();
     const email = "1@gmail.com"; //임시로 설정
+    const [open, setOpen] = useState(false);
+    const [select, setSelect] = useState(-1); 
+
+    useEffect(() => {
+        if(select !== -1){
+            setOpen(true);
+        }
+    }, [select])
     
     useEffect(() => {
         setWord(keyword);
@@ -201,11 +208,7 @@ function SearchPage(props) {
                             offset={offset}
                             pageLimit={pageLimit}
                             tabState={tabState}
-                            onClickItem={(item) => {
-                                navigate(`/main`); //선택된 글의 post-id, email을 가져와서 이동
-                                //setVisible(true);
-                                onScroll();
-                            }}
+                            setSelect={setSelect}
                         /> 
                         <Pagination // 페이지 수 나타냄
                             count={Math.floor((postCount - 1) / pageLimit + 1)} 
@@ -214,7 +217,13 @@ function SearchPage(props) {
                             variant="outlined" 
                             sx={{margin: '20px'}}
                         />      
-                    </Box>  
+                    </Box>
+                    <PostDialog 
+                        open={open}
+                        setOpen={setOpen}
+                        select={select}
+                        setSelect={setSelect}
+                    />
                 </Box>: <Box></Box>}
             </Container>
         </Box>       

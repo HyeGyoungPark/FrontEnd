@@ -4,7 +4,7 @@ import { AccountCircle } from '@mui/icons-material';
 import data from "../../../data.json";
 
 function SearchListItem(props) {
-    const {item, onClick} = props;
+    const {item, setSelect} = props;
 
     let content = "";
     item.desc.map((desc) => {
@@ -21,7 +21,7 @@ function SearchListItem(props) {
                 container 
                 wrap="nowrap" 
                 spacing={2} 
-                onClick={onClick} 
+                onClick={() => setSelect(item.id)} 
                 sx={{
                     cursor: 'pointer',
                 }}

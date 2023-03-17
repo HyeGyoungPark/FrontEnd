@@ -1,9 +1,11 @@
 import React from 'react';
 import {Box, Typography, Grid} from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
 
 function SearchListUserItem(props) {
-    const {user, onClick} = props;
+    const {user} = props;
+    const navigate = useNavigate();
 
     return (
         <Box sx={{margin: '10px 0'}}>
@@ -11,7 +13,7 @@ function SearchListUserItem(props) {
                 container 
                 wrap="nowrap" 
                 spacing={1} 
-                onClick={onClick} 
+                onClick={() => navigate('/main')} //해당 사용자 홈으로 이동
                 sx={{
                     cursor: 'pointer',
                 }}

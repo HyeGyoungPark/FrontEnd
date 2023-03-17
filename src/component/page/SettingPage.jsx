@@ -231,7 +231,7 @@ function SettingPage(props) {
                 <Box sx={{margin: '20px 0'}}>
                     <Typography variant="h6">이웃 관리</Typography>
                     <StyledDivider/>
-                    <TableContainer component={Paper} sx={{margin: "30px 0", width: '40%'}}>
+                    <TableContainer component={Paper} sx={{margin: "30px 0", width: '70%'}}>
                         <Table aria-label="simple table" size="small">
                             <TableHead>
                                 <TableRow>
@@ -255,11 +255,11 @@ function SettingPage(props) {
                                             onClick={() => onSelectClick(newFriend.email)}
                                             selected={isItemSelected}
                                         >
-                                            <StyledTableCell>
+                                            <StyledTableCell sx={{width: "30%"}}>
                                                 <Checkbox checked={isItemSelected}/>
                                             </StyledTableCell>
                                             <StyledTableCell>
-                                                {newFriend.nickName} 
+                                                {newFriend.nickName} <span style={{color:'rgba(0,0,0,0.50)'}}> | {newFriend.blogName}</span>
                                             </StyledTableCell>
                                         </TableRow>
                                     ); 

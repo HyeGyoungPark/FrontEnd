@@ -8,7 +8,6 @@ import img from '../../page/main/images';
 import CommentBox from "../CommentBox"
 import postData from "../../../postData.json";
 import ProfileImage from '../ProfileImage';
-import MusicBox from "../MusicBox";
 import ProfileContents from "../ProfileContents";
 import YouTubePlayer from "../YoutubePlayer";
 import LeftArrow from "../arrow/LeftArrow";
@@ -34,11 +33,12 @@ function ContentGrid(){
     const [id, setId] = useState();
     const [data, setData] = useState(img[0]); //초기 data
 
+    
+
     const onView = (id) => { //contentBox에서 선택한 id와 같은 id의 data 찾기 
         setData(img.find(item => item.id === id))
     }
 
-    
 
     /* 나중에 서버통신할 때 사용
     const [posts, setPosts] = useState([]); 
@@ -79,7 +79,6 @@ function ContentGrid(){
 
                             <ProfileImage/>     {/* 프사 */}
                             <ProfileContents/>
-                            <MusicBox />
                             <YouTubePlayer/>
                            
 
@@ -114,11 +113,13 @@ function ContentGrid(){
                                     {/*서버통신할 때 사용 
                                     <ContentBox Move={Move} post={posts}></ContentBox>
                                     */}
+                                    
 
                                     {/* map 함수를 사용해야 data가 1개씩 전달됨 & data수만큼 글 생성 */}
                                     { img.map((img) => (
                                     <ContentBox Move={Move} onView={onView} setId={setId} key={img.id} img={img} {...img}></ContentBox>  
                                     ))}
+                                    
                                 </Grid>
                                 <Box
                                     sx={{
@@ -152,9 +153,11 @@ function ContentGrid(){
                         //ref={move}
                     >
                         <Button
+                            size="small"
                             style={{
                                 float: 'right',
-                                margin: '0.5%',
+                                //margin: '0.01%',
+                                
                                 padding: 0
                             }}
                             ref={move} //이런 입력 , button component에만 적용됨
@@ -162,10 +165,25 @@ function ContentGrid(){
                         >
                             X
                         </Button>
-                        <div style={{display: 'flex'}}>
-                        <HiddenContentBox data={data}></HiddenContentBox>
-                        <CommentBox data={postData}></CommentBox>
-                        </div>
+
+
+                        <Grid container spacing={2}>
+                            <Grid item xs={7}>
+                                <HiddenContentBox data={data} ></HiddenContentBox>
+
+                            </Grid>
+                            <Grid item xs={5}>
+                                
+                                <CommentBox Id={data.id} data={ postData } ></CommentBox>
+                            </Grid>
+
+                        </Grid>
+
+                        {/* <div style={{display: 'flex'}}>
+                            
+                            
+                        
+                        </div> */}
                     </Box>
                 </Grid>
             }

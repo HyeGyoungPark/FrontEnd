@@ -14,7 +14,7 @@ const CommentLabel = styled.p`
 `
 const Wrapper = styled.div`
     padding: 16px;
-    width: calc(40% - 32px);
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,12 +35,15 @@ const ContentText = styled.p`
 const { TextArea } = Input
 
 function CommentBox(props) {
+    const { Id, data } = props;
+    
     const navigate = useNavigate();
-    const { postId } = useParams();
 
-    const postcomment = postdata.find((item) => {
-        return item.id == postId;
+    const postcomment = data.find((item) => {  //postid에 대응하는 코멘트 id 찾기
+        return item.post_id === Id;
     });
+
+    console.log(props);
 
     const [comment, setComment] = useState("");
     
@@ -57,7 +60,7 @@ function CommentBox(props) {
             <TextArea 
                 value={comment}
                 onChange={(event) => {setComment(event.target.value)}}
-                autoSize={{minRows: 2, maxRows: 4}}
+                autoSize={{minRows: 1, maxRows: 4}}
             />
         </ContentText>
 

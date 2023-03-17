@@ -4,7 +4,7 @@ import SearchListItem from '../ui/search/SearchListItem';
 import SearchListUserItem from '../ui/search/SearchListUserItem';
 
 function SearchList(props) {
-    const {list, onClickItem, offset, pageLimit, tabState} = props;
+    const {list, offset, pageLimit, tabState, setSelect} = props;
 
     return (
         <Box sx={{width: '95%'}}>
@@ -17,12 +17,11 @@ function SearchList(props) {
                             <SearchListItem 
                                 key={item.id}
                                 item={item}
-                                onClick={() => {onClickItem(item)}}
+                                setSelect={setSelect}
                             />:
                             <SearchListUserItem 
                                 key={item.email}
                                 user={item}
-                                onClick={() => {onClickItem(item)}}
                             />
                         }    
                         <Divider/>  

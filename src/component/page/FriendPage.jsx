@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Sidebar from './Sidebar';
 import {Box, Button, Typography, Divider} from '@mui/material';
 import { Container } from '@mui/system';
 import FriendList from '../list/FriendList';
 import postData from "../../postData.json";
+import PostDialog from '../ui/friend/PostDialog';
 import img from "./main/images";
 import { styled } from '@mui/system';
 
@@ -17,6 +18,15 @@ const StyledDivider = styled(Divider)({
 
 function FriendPage(props) {
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [select, setSelect] = useState(-1); 
+
+    useEffect(() => {
+        if(select !== -1){
+            setOpen(true);
+        }
+    }, [select])
+
     return (
         <Box>
             <Sidebar/>
@@ -43,11 +53,15 @@ function FriendPage(props) {
                     >
                         <FriendList 
                             data={img} //검색 결과인 친구들의 새 글 목록
-                            onClickItem={(item) => {
-                                navigate(`/main`); 
-                            }}
+                            setSelect={setSelect}
                         />  
                     </Box>  
+                    <PostDialog 
+                        open={open}
+                        setOpen={setOpen}
+                        select={select}
+                        setSelect={setSelect}
+                    />
                 </Box>
             </Container>
         </Box>
