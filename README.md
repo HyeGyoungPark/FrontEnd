@@ -1,3 +1,6 @@
+# Github 사용법 & React 정리
+https://www.notion.so/3f853319b13445148656b4bdd58536cf?pvs=4
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
