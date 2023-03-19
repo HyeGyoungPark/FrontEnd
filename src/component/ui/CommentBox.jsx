@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import CommentList from "../list/CommentList";
-import TextInput from "./TextInput";
-import postdata from "../../postData.json";
 import { Box } from '@mui/material'
 import { Button } from '@mui/material';
 import { Input } from "antd"
@@ -93,5 +91,3 @@ function CommentBox(props) {
 }
 
 export default CommentBox;
-
-
