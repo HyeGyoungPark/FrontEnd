@@ -1,4 +1,7 @@
-# Github 사용법 & React 정리
+# 시연영상
+<img src = "https://user-images.githubusercontent.com/94467302/226165875-eadd2807-c3cd-4e32-b4d2-bb39d5ca2c1c.mp4">
+
+## Github 사용법 & React 정리
 https://www.notion.so/3f853319b13445148656b4bdd58536cf?pvs=4
 
 # Getting Started with Create React App
