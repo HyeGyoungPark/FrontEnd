@@ -1,195 +1,118 @@
-import React, { useState, useRef } from "react";
+import React, {useState, useEffect} from "react";
 import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
-import { Button } from '@mui/material';
-import ContentBox from "./ContentBox";
-import HiddenContentBox from "./HiddenContentBox";
-import img from '../../page/main/images';
-import CommentBox from "../CommentBox"
-import postData from "../../../postData.json";
 import ProfileImage from '../ProfileImage';
 import ProfileContents from "../ProfileContents";
 import YouTubePlayer from "../YoutubePlayer";
-import LeftArrow from "../arrow/LeftArrow";
-import RightArrow from "../arrow/RightArrow";
-import GalleryList from "../../page/main/gallery/GalleryList";
+import axios from "axios";
+import {Link} from "react-router-dom";
 
 function ContentGrid(){
 
-    const [visible, setVisible] = useState(false); //-> delay 없애는 것 필요
-    const move = useRef(); // 이런 input , button component에만 적용됨
-    const stay = useRef(); // focus 이동시킬 때 사용
+    const [postData, setPostData] = useState(null);
 
-    const Move = () => {
-        setVisible(true); // 글 자세히 보기 창과 댓글 쓰기 창을 보여줌
-        move.current.focus(); // focus 이동
-    };
-
-    const Stay = () => {
-        setVisible(false);
-        stay.current.focus();
-    };
-
-    const [id, setId] = useState();
-    const [data, setData] = useState(img[0]); //초기 data
-
-    
-
-    const onView = (id) => { //contentBox에서 선택한 id와 같은 id의 data 찾기 
-        setData(img.find(item => item.id === id))
-    }
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/posts/list")
+            .then(res => {
+                setPostData(res.data);
+            })
+    }, []);
 
 
-    /* 나중에 서버통신할 때 사용
-    const [posts, setPosts] = useState([]); 
+    if (postData) {
+        let urlList = [];
+        for (let i = 0; i < postData.length; i++) {
+            urlList.push('/posts/' + postData[i].id);
+        }
 
-    const getPosts = () => {
-        axios
-        .get('서버주소') //axios를 통해 HTTP 요청을 보내는 코드
-        .then( (response) => { //then()에서는 HTTP 요청을 통해 받아온 data를 처리할 수 있다
-            setPosts(response.data); // 이전에 useState으로 생성했던 setPosts 함수를 통해 data를 posts에 저장
-        })
-    }
-
-    useEffect(getPosts, []);
-    */
-
-    
-    
-    return(
-        <Grid container spacing={6}>
-            <Grid item xs={12} sm={6.6}>
-
-                <Grid container spacing={1}>
-                    <Grid item xs={12} sm={3}>
-                        <Box
-                            sx={{
-                                width: '100%',
-                                height: '84vh',
-                                border: '1px solid skyblue'
-                            }}
-                            //ref={stay} -> 여기쓰면 적용안됨
-                        >
-                            <Button
-                                ref={stay} // -> 여기써야 적용됨
-                            >
-                                profile
-                            </Button>
-                            profile
-
-                            <ProfileImage/>     {/* 프사 */}
-                            <ProfileContents/>
-                            <YouTubePlayer/>
-                           
-
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={9}>
-                        <Box
-                            sx={{
-                                width: '100%',
-                                height: '84vh',
-                                border: '1px solid skyblue',
-                                //padding : '1%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                            }}
-                        >
-                            <LeftArrow/>
-                            <Box
-                                sx={{
-                                    width: '100%',
-                                    height: '60vh',
-                                    padding: '1%',
-                                    //border: '1px solid red',
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                                }}
-                            >
-                                <Grid container spacing={2}>
-                                    {/* 하위 component로 전달할 함수 매개변수로 주기 */}
-
-                                    {/*서버통신할 때 사용 
-                                    <ContentBox Move={Move} post={posts}></ContentBox>
-                                    */}
-                                    
-
-                                    {/* map 함수를 사용해야 data가 1개씩 전달됨 & data수만큼 글 생성 */}
-                                    { img.map((img) => (
-                                    <ContentBox Move={Move} onView={onView} setId={setId} key={img.id} img={img} {...img}></ContentBox>  
-                                    ))}
-                                    
-                                </Grid>
-                                <Box
-                                    sx={{
-                                        width: '100%',
-                                        border: '1px solid green',
-                                        marginTop: '3%',
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    <GalleryList/>
-                                </Box>
-                            </Box>
-                            <RightArrow />
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Grid>
-            {
-                visible 
-
-                && 
-
-                <Grid item xs={12} sm={5.4}>
+        return (
+            <Grid container spacing={1}>
+                <Grid item xs={12} sm={3}>
                     <Box
                         sx={{
                             width: '100%',
-                            height: '86vh',
-                            border: '1px solid skyblue',
-                            //margin: '3%'
+                            height: '84vh',
+                            border: '1px solid skyblue'
                         }}
-                        //ref={move}
                     >
-                        <Button
-                            size="small"
-                            style={{
-                                float: 'right',
-                                //margin: '0.01%',
-                                
-                                padding: 0
-                            }}
-                            ref={move} //이런 입력 , button component에만 적용됨
-                            onClick ={Stay}
-                        >
-                            X
-                        </Button>
+                        <ProfileImage/> {/* 프사 */}
+                        <ProfileContents/>
+                        <YouTubePlayer/>
 
-
-                        <Grid container spacing={2}>
-                            <Grid item xs={7}>
-                                <HiddenContentBox data={data} ></HiddenContentBox>
-
-                            </Grid>
-                            <Grid item xs={5}>
-                                
-                                <CommentBox Id={data.id} data={ postData } ></CommentBox>
-                            </Grid>
-
-                        </Grid>
-
-                        {/* <div style={{display: 'flex'}}>
-                            
-                            
-                        
-                        </div> */}
                     </Box>
                 </Grid>
-            }
-        </Grid>
-    );
+                <Grid item xs={12} sm={9}>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            height: '84vh',
+                            border: '1px solid skyblue',
+                            padding: '1%'
+                        }}
+                    >
 
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={3}>
+                                {urlList.map((u, index) =>
+                                    <Box
+                                        sx={{
+                                            width: '100%',
+                                            height: '18vh',
+                                            border: '1px solid skyblue',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            "&.MuiBox-root:hover":{
+                                                backgroundColor: 'lightgray'
+                                            }
+                                        }}
+                                    >
+                                        <Link to={u}>
+                                            [제목]{postData[index].title}
+                                        </Link>
+                                    </Box>
+                                )}
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Grid>
+            </Grid>
+        );
+    } else{
+        return (
+            <Grid container spacing={1}>
+                <Grid item xs={12} sm={3}>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            height: '84vh',
+                            border: '1px solid skyblue'
+                        }}
+                    >
+                        <ProfileImage/> {/* 프사 */}
+                        <ProfileContents/>
+                        <YouTubePlayer/>
+
+                    </Box>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            height: '84vh',
+                            border: '1px solid skyblue',
+                            padding: '1%'
+                        }}
+                    >
+
+                        <Grid container spacing={2}>
+
+                        </Grid>
+                    </Box>
+                </Grid>
+            </Grid>
+        );
+    }
 }
 
 export default ContentGrid;

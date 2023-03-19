@@ -27,10 +27,7 @@ function PostDialog({open, setOpen, select, setSelect}) {
                 <DialogContent>
                     <Box sx={{display:'flex'}}>
                         <HiddenContentBox data={data} sx={{display:'inline-block'}}/>
-                        <CommentBox data={postData} sx={{display:'inline-block'}}/>
-                    </Box>
-                    <Box>
-
+                        <CommentBox Id={data.id} data={postData} sx={{display:'inline-block'}}/>
                     </Box>
                 </DialogContent>
         </Dialog>
